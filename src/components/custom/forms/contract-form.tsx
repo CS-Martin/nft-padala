@@ -57,7 +57,7 @@ export const ContractForm = () => {
 
             console.log('Transaction sent:', tx);
         } catch (error) {
-            console.error('Error during minting process:', error);
+            console.log('Error during minting process:', error);
         } finally {
             console.log('Minting process completed');
         }
@@ -115,7 +115,8 @@ export const ContractForm = () => {
 
                 <Button
                     type='submit'
-                    className='cursor-pointer'>
+                    className='cursor-pointer bg-blue-400 hover:bg-blue-500 w-full mt-3'
+                    disabled={isPending}>
                     Create Item
                 </Button>
             </form>
