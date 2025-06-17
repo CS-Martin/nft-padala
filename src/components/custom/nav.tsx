@@ -50,7 +50,7 @@ export const CustomNav = () => {
     return (
         <nav className={cn('fixed top-0 z-50 sm:w-[500px] px-2 md:px-5 flex flex-row items-center justify-between transition-all duration-200 h-20')}>
             <div>
-                <h1 className=' font-bold text-white'>NFT Padala</h1>
+                <h1 className='font-bold text-white'>NFT Padala</h1>
             </div>
             <WalletConnection
                 walletStatus={walletStatus}
