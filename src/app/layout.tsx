@@ -43,7 +43,8 @@ export default async function RootLayout({
                     enableSystem
                     disableTransitionOnChange>
                     <CustomWagmiProvider initialState={initalState}>
-                        <NavBar /> {children}
+                        <NavBar />
+                        {children}
                     </CustomWagmiProvider>
                 </ThemeProvider>
             </body>

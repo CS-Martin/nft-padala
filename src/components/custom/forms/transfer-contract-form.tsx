@@ -63,13 +63,12 @@ export default function TransferContractForm({ realId }: { realId: string | null
     return (
         <>
             {realId ? (
-                <div className='w-full text-white flex flex-col gap-4'>
+                <div className='w-full flex flex-col gap-4'>
                     <form onSubmit={handleSubmit(handleTransfer)}>
                         <div>
                             <Label>Item ID:</Label>
                             <Input
                                 id='realId'
-                                className='text-white'
                                 value={realId}
                                 readOnly
                             />
@@ -80,7 +79,6 @@ export default function TransferContractForm({ realId }: { realId: string | null
                             <Input
                                 readOnly
                                 id='to'
-                                className='text-white'
                                 value={walletAddress}
                                 {...register('to')}
                             />

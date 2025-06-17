@@ -43,23 +43,25 @@
     --radius-xl: calc(var(--radius) + 4px);
     --animate-shimmer-slide: shimmer-slide var(--speed) ease-in-out infinite alternate;
     --animate-spin-around: spin-around calc(var(--speed) * 2) infinite linear;
-  @keyframes shimmer-slide {
-  to {
-    transform: translate(calc(100cqw - 100%), 0);
+    @keyframes shimmer-slide {
+        to {
+            transform: translate(calc(100cqw - 100%), 0);
         }
     }
-  @keyframes spin-around {
-  0% {
-    transform: translateZ(0) rotate(0);
+    @keyframes spin-around {
+        0% {
+            transform: translateZ(0) rotate(0);
         }
-  15%, 35% {
-    transform: translateZ(0) rotate(90deg);
+        15%,
+        35% {
+            transform: translateZ(0) rotate(90deg);
         }
-  65%, 85% {
-    transform: translateZ(0) rotate(270deg);
+        65%,
+        85% {
+            transform: translateZ(0) rotate(270deg);
         }
-  100% {
-    transform: translateZ(0) rotate(360deg);
+        100% {
+            transform: translateZ(0) rotate(360deg);
         }
     }
 }
@@ -140,36 +142,4 @@
     body {
         @apply bg-background text-foreground;
     }
-}
-
-h1 {
-    @apply text-5xl font-bold;
-}
-
-h2 {
-    @apply text-4xl font-bold;
-}
-
-h3 {
-    @apply text-3xl font-bold;
-}
-
-h4 {
-    @apply text-2xl font-bold;
-}
-
-h5 {
-    @apply text-xl font-bold;
-}
-
-h6 {
-    @apply text-lg font-bold;
-}
-
-p {
-    @apply text-base;
-}
-
-small {
-    @apply text-xl;
 }

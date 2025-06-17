@@ -1,3 +1,5 @@
+'use client';
+
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import { Announcement, AnnouncementTag, AnnouncementTitle } from '@/components/ui/kibo-ui/announcement';
 import { ArrowUpRightIcon } from 'lucide-react';
@@ -22,12 +24,11 @@ export default function Home() {
                         <h1>Headline</h1>
                         <p>Paragraph</p>
 
-                        <ShimmerButton className='h-[40px]'>
-                            <Link
-                                href={'/contract/create'}
-                                className='dark:text-white'>
-                                Get Started
-                            </Link>
+                        <ShimmerButton
+                            type='button'
+                            className='h-[40px]'
+                            onClick={() => console.log('Get Started button clicked')}>
+                            <Link href={'/contract/create'}>Get Started</Link>
                         </ShimmerButton>
                     </div>
                 </section>

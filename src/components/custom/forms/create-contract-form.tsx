@@ -17,7 +17,7 @@ const createContractFormSchema = z.object({
     realId: z.string().min(1, 'Real ID is required'),
     to: z.string().min(1, 'Recipient wallet address is required'),
     itemName: z.string().min(1, 'Item name is required'),
-    origin: z.string().min(1, 'Owner address is required'),
+    locationOrigin: z.string().min(1, 'Owner address is required'),
     finalRecipient: z.string().min(1, `Receiver's wallet address is required`),
 });
 
@@ -40,7 +40,7 @@ export const CreateContractForm = () => {
             realId: '', // Unique identifier for the item
             to: walletAddress || '', // Wallet address of sender
             itemName: '', // Name of the item
-            origin: '', // Sender's address or item origin
+            locationOrigin: '', // Sender's address or item origin
             finalRecipient: '', // Receiver's wallet address
         },
     });
@@ -104,7 +104,7 @@ export const CreateContractForm = () => {
                         className='mt-2'
                         {...register('itemName')}
                     />
-                    {errors.itemName && <p className='text-red-500 text-[12px] mt-1'>{errors.itemName.message}</p>}
+                    {errors.itemName && <small className='text-red-500 text-xs mt-1'>{errors.itemName.message}</small>}
                 </div>
 
                 <div>
@@ -113,9 +113,9 @@ export const CreateContractForm = () => {
                         id='origin'
                         type='text'
                         className='mt-2'
-                        {...register('origin')}
+                        {...register('locationOrigin')}
                     />
-                    {errors.origin && <small className='text-red-500 text-xs mt-1'>{errors.origin.message}</small>}
+                    {errors.locationOrigin && <small className='text-red-500 text-xs mt-1'>{errors.locationOrigin.message}</small>}
                 </div>
 
                 <div>
