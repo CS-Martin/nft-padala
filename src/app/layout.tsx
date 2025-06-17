@@ -5,7 +5,7 @@ import { cookieToInitialState } from 'wagmi';
 import { WagmiConfig } from '@/lib/config';
 import { headers } from 'next/headers';
 import { CustomWagmiProvider } from '@/providers/wagmi-provider';
-import { CustomNav } from '@/components/custom/nav';
+import { ThemeProvider } from '@/components/ui/theme-provider';
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -32,12 +32,17 @@ export default async function RootLayout({
     const initalState = cookieToInitialState(WagmiConfig(), cookieHeader);
 
     return (
-        <html lang='en'>
-            <body className={`${geistSans.variable} ${geistMono.variable} relative antialiased w-[500px] mx-auto`}>
-                <CustomWagmiProvider initialState={initalState}>
-                    <CustomNav />
-                    {children}
-                </CustomWagmiProvider>
+        <html
+            lang='en'
+            suppressHydrationWarning>
+            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+                <ThemeProvider
+                    attribute='class'
+                    defaultTheme='system'
+                    enableSystem
+                    disableTransitionOnChange>
+                    <CustomWagmiProvider initialState={initalState}> {children}</CustomWagmiProvider>
+                </ThemeProvider>
             </body>
         </html>
     );
