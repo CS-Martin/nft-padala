@@ -77,7 +77,7 @@ export const ContractForm = () => {
         <div className='w-full text-white flex flex-col gap-4'>
             {transactionDone && (
                 <div>
-                    <QRGenerator value={watch('realId')} />
+                    <QRGenerator value={`http://localhost:3000/contract/transfer?id=${watch('realId')}`} />
                 </div>
             )}
 
