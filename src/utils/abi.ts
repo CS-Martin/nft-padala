@@ -1,5 +1,6 @@
 export const abi = [
     { inputs: [{ internalType: 'address', name: 'initialOwner', type: 'address' }], stateMutability: 'nonpayable', type: 'constructor' },
+    { inputs: [], name: 'DuplicateRealId', type: 'error' },
     {
         inputs: [
             { internalType: 'address', name: 'sender', type: 'address' },
@@ -25,6 +26,7 @@ export const abi = [
     { inputs: [{ internalType: 'uint256', name: 'tokenId', type: 'uint256' }], name: 'ERC721NonexistentToken', type: 'error' },
     { inputs: [], name: 'EmptyString', type: 'error' },
     { inputs: [], name: 'InvalidAddress', type: 'error' },
+    { inputs: [], name: 'ItemNotFound', type: 'error' },
     { inputs: [], name: 'NotCurrentOwner', type: 'error' },
     { inputs: [{ internalType: 'address', name: 'owner', type: 'address' }], name: 'OwnableInvalidOwner', type: 'error' },
     { inputs: [{ internalType: 'address', name: 'account', type: 'address' }], name: 'OwnableUnauthorizedAccount', type: 'error' },
@@ -55,7 +57,7 @@ export const abi = [
             { indexed: false, internalType: 'address', name: 'from', type: 'address' },
             { indexed: false, internalType: 'address', name: 'to', type: 'address' },
             { indexed: true, internalType: 'string', name: 'itemName', type: 'string' },
-            { indexed: true, internalType: 'string', name: 'origin', type: 'string' },
+            { indexed: true, internalType: 'string', name: 'locationOrigin', type: 'string' },
             { indexed: true, internalType: 'address', name: 'finalRecipient', type: 'address' },
             { indexed: false, internalType: 'string', name: 'itemIdentifier', type: 'string' },
         ],
@@ -135,13 +137,13 @@ export const abi = [
         type: 'function',
     },
     {
-        inputs: [{ internalType: 'uint256', name: 'tokenId', type: 'uint256' }],
-        name: 'getItemDetails',
+        inputs: [{ internalType: 'string', name: 'realId', type: 'string' }],
+        name: 'getItemDetailsByRealId',
         outputs: [
             {
                 components: [
                     { internalType: 'string', name: 's_itemName', type: 'string' },
-                    { internalType: 'string', name: 's_origin', type: 'string' },
+                    { internalType: 'string', name: 's_locationOrigin', type: 'string' },
                     { internalType: 'address', name: 's_finalRecipient', type: 'address' },
                     { internalType: 'string', name: 's_itemIdentifier', type: 'string' },
                 ],
@@ -170,7 +172,7 @@ export const abi = [
                     { internalType: 'string', name: 'realId', type: 'string' },
                     { internalType: 'address', name: 'to', type: 'address' },
                     { internalType: 'string', name: 'itemName', type: 'string' },
-                    { internalType: 'string', name: 'origin', type: 'string' },
+                    { internalType: 'string', name: 'locationOrigin', type: 'string' },
                     { internalType: 'address', name: 'finalRecipient', type: 'address' },
                 ],
                 internalType: 'struct RealWorldItemNFT.MintParams',
@@ -189,6 +191,13 @@ export const abi = [
     {
         inputs: [{ internalType: 'uint256', name: 'tokenId', type: 'uint256' }],
         name: 'ownerOf',
+        outputs: [{ internalType: 'address', name: '', type: 'address' }],
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
+        inputs: [{ internalType: 'string', name: 'realId', type: 'string' }],
+        name: 'ownerOfByRealId',
         outputs: [{ internalType: 'address', name: '', type: 'address' }],
         stateMutability: 'view',
         type: 'function',
@@ -255,7 +264,7 @@ export const abi = [
     },
     {
         inputs: [
-            { internalType: 'uint256', name: 'tokenId', type: 'uint256' },
+            { internalType: 'string', name: 'realId', type: 'string' },
             { internalType: 'address', name: 'to', type: 'address' },
         ],
         name: 'transferItem',

@@ -30,6 +30,7 @@ export const QRGenerator = ({ value, onGenerate }: { value: string; onGenerate?:
                     viewBox={`0 0 256 256`}
                 />
             </div>
+            <small>{value}</small>
             <p className='text-center text-white mt-4'>Scan the QR code to access the contract page</p>
         </div>
     );

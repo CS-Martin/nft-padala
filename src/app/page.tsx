@@ -7,7 +7,7 @@ export default function Home() {
             <Button
                 variant={'default'}
                 asChild>
-                <Link href={'/contract'}>Get Started!</Link>
+                <Link href={'/contract/create'}>Get Started!</Link>
             </Button>
         </main>
     );

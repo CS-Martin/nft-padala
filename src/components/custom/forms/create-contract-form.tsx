@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -11,7 +13,7 @@ import { abi } from '@/utils/abi';
 import { QRGenerator } from '../qr-generator';
 import Link from 'next/link';
 
-const contractFormSchema = z.object({
+const createContractFormSchema = z.object({
     realId: z.string().min(1, 'Real ID is required'),
     to: z.string().min(1, 'Recipient wallet address is required'),
     itemName: z.string().min(1, 'Item name is required'),
@@ -19,9 +21,9 @@ const contractFormSchema = z.object({
     finalRecipient: z.string().min(1, `Receiver's wallet address is required`),
 });
 
-type ContractFormInputs = z.infer<typeof contractFormSchema>;
+export type CreateContractFormInputs = z.infer<typeof createContractFormSchema>;
 
-export const ContractForm = () => {
+export const CreateContractForm = () => {
     const walletAddress = useWalletStore((state) => state.walletStatus.address);
 
     const { writeContractAsync, isPending } = useWriteContract();
@@ -32,8 +34,8 @@ export const ContractForm = () => {
         watch,
         formState: { errors },
         setValue,
-    } = useForm<ContractFormInputs>({
-        resolver: zodResolver(contractFormSchema),
+    } = useForm<CreateContractFormInputs>({
+        resolver: zodResolver(createContractFormSchema),
         defaultValues: {
             realId: '', // Unique identifier for the item
             to: walletAddress || '', // Wallet address of sender
@@ -50,7 +52,7 @@ export const ContractForm = () => {
         setValue('realId', id);
     }, [setValue, walletAddress]);
 
-    const handleMint = async (data: ContractFormInputs) => {
+    const handleMint = async (data: CreateContractFormInputs) => {
         console.log('Form submitted with data:', data);
 
         try {
@@ -64,7 +66,7 @@ export const ContractForm = () => {
             if (tx) {
                 console.log('Transaction sent:', tx);
                 setTransactionDone(true);
-                setValue('realId', data.realId); // Update the realId in the form
+                setValue('realId', data.realId);
             }
         } catch (error) {
             console.log('Error during minting process:', error);
