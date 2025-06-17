@@ -2,6 +2,9 @@
 
 import { WalletStatus } from '@/types/wallet-status.type';
 import { Button } from '../ui/button';
+import NeumorphButton from '../ui/neumorph-button';
+import { TextureButton } from '../ui/texture-button';
+import { WalletMinimal } from 'lucide-react';
 
 interface WalletConnectionProps {
     walletStatus: WalletStatus;
@@ -22,12 +25,14 @@ export const WalletConnection = ({ walletStatus, connectWallet, disconnectWallet
                     {walletStatus.address?.slice(-4)})
                 </Button>
             ) : (
-                <Button
-                    onClick={connectWallet}
-                    disabled={isLoading}
-                    className='cursor-pointer bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
-                    Connect Wallet
-                </Button>
+                <>
+                    <Button
+                        onClick={connectWallet}
+                        disabled={isLoading}
+                        className='cursor-pointer bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
+                        <WalletMinimal size={12} /> Connect Wallet
+                    </Button>
+                </>
             )}
         </div>
     );

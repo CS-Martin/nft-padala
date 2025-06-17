@@ -76,7 +76,7 @@ export const CreateContractForm = () => {
     };
 
     return (
-        <div className='w-full text-white flex flex-col gap-4'>
+        <div className='w-full flex flex-col gap-4'>
             {transactionDone && (
                 <div>
                     <QRGenerator value={`http://localhost:3000/contract/transfer?id=${watch('realId')}`} />
@@ -90,7 +90,7 @@ export const CreateContractForm = () => {
                         readOnly
                         id='to'
                         type='text'
-                        className='text-white mt-2'
+                        className='mt-2'
                         {...register('to')}
                         value={walletAddress}
                     />
@@ -101,10 +101,10 @@ export const CreateContractForm = () => {
                     <Input
                         id='itemName'
                         type='text'
-                        className='text-white mt-2'
+                        className='mt-2'
                         {...register('itemName')}
                     />
-                    {errors.itemName && <p className='text-red-500 text-sm mt-1'>{errors.itemName.message}</p>}
+                    {errors.itemName && <p className='text-red-500 text-[12px] mt-1'>{errors.itemName.message}</p>}
                 </div>
 
                 <div>
@@ -112,10 +112,10 @@ export const CreateContractForm = () => {
                     <Input
                         id='origin'
                         type='text'
-                        className='text-white mt-2'
+                        className='mt-2'
                         {...register('origin')}
                     />
-                    {errors.origin && <p className='text-red-500 text-sm mt-1'>{errors.origin.message}</p>}
+                    {errors.origin && <small className='text-red-500 text-xs mt-1'>{errors.origin.message}</small>}
                 </div>
 
                 <div>
@@ -123,10 +123,10 @@ export const CreateContractForm = () => {
                     <Input
                         id='finalRecipient'
                         type='text'
-                        className='text-white mt-2'
+                        className='mt-2'
                         {...register('finalRecipient')}
                     />
-                    {errors.finalRecipient && <p className='text-red-500 text-sm mt-1'>{errors.finalRecipient.message}</p>}
+                    {errors.finalRecipient && <small className='text-red-500 text-xs mt-1'>{errors.finalRecipient.message}</small>}
                 </div>
 
                 {!transactionDone && (
@@ -145,7 +145,7 @@ export const CreateContractForm = () => {
                     <Button
                         className='w-full hover:bg-blue-500 bg-blue-400 mt-3'
                         asChild>
-                        <Link href={'/contract'}>Go back</Link>
+                        <Link href={'/'}>Go back</Link>
                     </Button>
                 </div>
             )}
