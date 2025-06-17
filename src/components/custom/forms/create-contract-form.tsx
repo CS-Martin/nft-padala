@@ -56,15 +56,15 @@ export const CreateContractForm = () => {
         console.log('Form submitted with data:', data);
 
         try {
-            const tx = await writeContractAsync({
+            const result = await writeContractAsync({
                 abi: abi,
-                address: '0xd74B3e7AD1d375cD2bd419148C03C65E8985e4c1',
+                address: '0x8ac822062cD4A86b9654a819566fb0C7C50f29BA',
                 functionName: 'mint',
                 args: [data],
             });
 
-            if (tx) {
-                console.log('Transaction sent:', tx);
+            if (result) {
+                console.log('Transaction sent:', result);
                 setTransactionDone(true);
                 setValue('realId', data.realId);
             }
