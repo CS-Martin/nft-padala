@@ -6,6 +6,8 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
+import { useWriteContract } from 'wagmi';
+import { abi } from '@/utils/abi';
 
 const contractFormSchema = z.object({
     realId: z.string().min(1, 'Real ID is required'),
@@ -19,6 +21,7 @@ type ContractFormInputs = z.infer<typeof contractFormSchema>;
 
 export const ContractForm = () => {
     const walletAddress = useWalletStore((state) => state.walletStatus.address);
+    const { writeContractAsync, isPending } = useWriteContract();
 
     const {
         register,
@@ -41,15 +44,30 @@ export const ContractForm = () => {
         setValue('realId', id);
     }, [setValue, walletAddress]);
 
-    const handleCreate = (data: ContractFormInputs) => {
+    const handleMint = async (data: ContractFormInputs) => {
         console.log('Form submitted with data:', data);
+
+        try {
+            const tx = await writeContractAsync({
+                abi: abi,
+                address: '0xd74B3e7AD1d375cD2bd419148C03C65E8985e4c1',
+                functionName: 'mint',
+                args: [data],
+            });
+
+            console.log('Transaction sent:', tx);
+        } catch (error) {
+            console.error('Error during minting process:', error);
+        } finally {
+            console.log('Minting process completed');
+        }
     };
 
     return (
         <div className='w-full text-white flex flex-col gap-4'>
             <div>Item ID:</div>
 
-            <form onSubmit={handleSubmit(handleCreate)}>
+            <form onSubmit={handleSubmit(handleMint)}>
                 <div>
                     <Label className=''>My wallet address:</Label>
                     <Input
