@@ -5,9 +5,11 @@ import { useWalletStore } from '@/stores/wallet.store';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useWriteContract } from 'wagmi';
 import { abi } from '@/utils/abi';
+import { QRGenerator } from '../qr-generator';
+import Link from 'next/link';
 
 const contractFormSchema = z.object({
     realId: z.string().min(1, 'Real ID is required'),
@@ -21,11 +23,13 @@ type ContractFormInputs = z.infer<typeof contractFormSchema>;
 
 export const ContractForm = () => {
     const walletAddress = useWalletStore((state) => state.walletStatus.address);
+
     const { writeContractAsync, isPending } = useWriteContract();
 
     const {
         register,
         handleSubmit,
+        watch,
         formState: { errors },
         setValue,
     } = useForm<ContractFormInputs>({
@@ -38,6 +42,8 @@ export const ContractForm = () => {
             finalRecipient: '', // Receiver's wallet address
         },
     });
+
+    const [transactionDone, setTransactionDone] = useState(false);
 
     useEffect(() => {
         const id = crypto.randomUUID();
@@ -55,7 +61,11 @@ export const ContractForm = () => {
                 args: [data],
             });
 
-            console.log('Transaction sent:', tx);
+            if (tx) {
+                console.log('Transaction sent:', tx);
+                setTransactionDone(true);
+                setValue('realId', data.realId); // Update the realId in the form
+            }
         } catch (error) {
             console.log('Error during minting process:', error);
         } finally {
@@ -65,7 +75,11 @@ export const ContractForm = () => {
 
     return (
         <div className='w-full text-white flex flex-col gap-4'>
-            <div>Item ID:</div>
+            {transactionDone && (
+                <div>
+                    <QRGenerator value={watch('realId')} />
+                </div>
+            )}
 
             <form onSubmit={handleSubmit(handleMint)}>
                 <div>
@@ -113,13 +127,26 @@ export const ContractForm = () => {
                     {errors.finalRecipient && <p className='text-red-500 text-sm mt-1'>{errors.finalRecipient.message}</p>}
                 </div>
 
-                <Button
-                    type='submit'
-                    className='cursor-pointer bg-blue-400 hover:bg-blue-500 w-full mt-3'
-                    disabled={isPending}>
-                    Create Item
-                </Button>
+                {!transactionDone && (
+                    <Button
+                        type='submit'
+                        className='cursor-pointer bg-blue-400 hover:bg-blue-500 w-full mt-3'
+                        disabled={isPending}>
+                        Create Item
+                    </Button>
+                )}
             </form>
+
+            {transactionDone && (
+                <div className='mt-4'>
+                    <p className='text-green-500'>Transaction successful! Your item has been created.</p>
+                    <Button
+                        className='w-full hover:bg-blue-500 bg-blue-400 mt-3'
+                        asChild>
+                        <Link href={'/contract'}>Go back</Link>
+                    </Button>
+                </div>
+            )}
         </div>
     );
 };
