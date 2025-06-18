@@ -10,14 +10,13 @@ interface PaginationComponent<TData> {
 
 export function PaginationComponent<TData>({ pageSize, dataLength, table }: PaginationComponent<TData>) {
     return (
-        <div className='items-center w-full p-1.5 mt-4 border rounded-lg md:p-5 md:flex md:flex-row md:justify-between'>
-            <div className='items-center justify-between hidden w-1/2 md:flex'>
-                <Label className='font-normal '>
-                    Showing {table.getState().pagination.pageIndex * pageSize + 1} to {Math.min((table.getState().pagination.pageIndex + 1) * pageSize, dataLength)} out of{' '}
-                    {dataLength} results
-                </Label>
-            </div>
-            <Pagination className='md:justify-end md:w-1/2'>
+        <div className='w-full mt-8 flex items-center justify-between'>
+            <Label className='text-zinc-300 text-nowrap'>
+                Showing {table.getState().pagination.pageIndex * pageSize + 1} to {Math.min((table.getState().pagination.pageIndex + 1) * pageSize, dataLength)} out of {dataLength}{' '}
+                results
+            </Label>
+
+            <Pagination className='justify-end'>
                 <PaginationContent>
                     <PaginationItem>
                         <PaginationPrevious
@@ -35,7 +34,7 @@ export function PaginationComponent<TData>({ pageSize, dataLength, table }: Pagi
                                     e.preventDefault();
                                     table.setPageIndex(index);
                                 }}
-                                className={`cursor-pointer ${index === table.getState().pagination.pageIndex ? 'bg-blue-500 text-white' : ''}`}>
+                                className={`cursor-pointer ${index === table.getState().pagination.pageIndex ? 'bg-blue-500 hover:bg-blue-600 text-white' : ''}`}>
                                 {index + 1}
                             </PaginationLink>
                         </PaginationItem>
