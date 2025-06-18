@@ -44,7 +44,7 @@ export default function TransferContractForm({ realId }: { realId: string | null
         try {
             const result = await writeContractAsync({
                 abi: abi,
-                address: '0x8ac822062cD4A86b9654a819566fb0C7C50f29BA',
+                address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
                 functionName: 'transferItem',
                 args: [data.realId, data.to],
             });

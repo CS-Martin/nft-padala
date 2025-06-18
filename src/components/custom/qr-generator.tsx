@@ -25,6 +25,7 @@ export const QRGenerator = ({ value }: { value: string }) => {
 
                 // Check if response is JSON
                 const contentType = response.headers.get('content-type');
+
                 if (!contentType?.includes('application/json')) {
                     const text = await response.text();
                     throw new Error(`Unexpected response: ${text.substring(0, 100)}`);
@@ -44,7 +45,7 @@ export const QRGenerator = ({ value }: { value: string }) => {
         };
 
         uploadQrCode();
-    }, [value]);
+    }, []);
 
     return (
         <div className='flex flex-col justify-center items-center'>

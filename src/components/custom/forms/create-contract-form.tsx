@@ -13,6 +13,7 @@ import { abi } from '@/utils/abi';
 import { QRGenerator } from '../qr-generator';
 import Link from 'next/link';
 import NeumorphButton from '@/components/ui/neumorph-button';
+import { generateUID } from '@/lib/utils';
 
 const createContractFormSchema = z.object({
     realId: z.string().min(1, 'Real ID is required'),
@@ -49,8 +50,11 @@ export const CreateContractForm = () => {
     const [transactionDone, setTransactionDone] = useState(false);
 
     useEffect(() => {
-        const id = crypto.randomUUID();
-        setValue('realId', id);
+        if (!walletAddress) return;
+
+        const uid = generateUID();
+
+        setValue('realId', uid);
     }, [setValue, walletAddress]);
 
     const handleMint = async (data: CreateContractFormInputs) => {
@@ -59,7 +63,7 @@ export const CreateContractForm = () => {
         try {
             const result = await writeContractAsync({
                 abi: abi,
-                address: '0x8ac822062cD4A86b9654a819566fb0C7C50f29BA',
+                address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
                 functionName: 'mint',
                 args: [data],
             });
@@ -87,6 +91,7 @@ export const CreateContractForm = () => {
             <form
                 onSubmit={handleSubmit(handleMint)}
                 className='flex flex-col gap-5'>
+                <div>{watch('realId')}</div>
                 <div>
                     <Label className=''>My wallet address:</Label>
                     <Input

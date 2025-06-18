@@ -130,7 +130,7 @@ function Hero() {
                         />
                     </AnnouncementTitle>
                 </Announcement>
-                <h1>Send Digital Goods the Smart Way</h1>
+                <h1>Send Everything in a Smart Way</h1>
                 <p className='text-zinc-300'>Blockchain-powered NFT delivery fast, secure, and trackable.</p>
                 <div className='flex items-center gap-2'>
                     <Link href='/contract/create'>
