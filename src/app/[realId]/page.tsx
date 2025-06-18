@@ -1,13 +1,18 @@
 'use client';
 
+import { Breadcrumbs } from '@/components/custom/breadcrumbs';
+import { shortenedItemId } from '@/lib/utils';
 import { ItemDetailsResponse } from '@/types/item-details.type';
 import { abi } from '@/utils/abi';
+import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { useReadContract } from 'wagmi';
 
 export default function ItemDetailsPage() {
     const searchParams = useSearchParams();
     const realId = searchParams.get('id');
+
+    const sid = shortenedItemId(realId);
 
     const { data, isLoading } = useReadContract({
         abi: abi,
@@ -24,8 +29,25 @@ export default function ItemDetailsPage() {
         return <div>Loading..</div>;
     }
 
-    return (
+    return realId ? (
         <div>
+            <Breadcrumbs
+                items={[
+                    { label: 'Home', href: '/' },
+                    { label: 'Dashboard', href: '/dashboard' },
+                    { label: 'Contract', href: '/dashboard' },
+                    { label: `${sid}`, href: '#' },
+                ]}
+            />
+            <div className='border w-fit p-5 rounded-lg'>
+                <Image
+                    src={`${(process.env.NEXT_PUBLIC_R2_BUCKET_PUBLIC_URL ?? '') + '/qrcodes/' + realId}.svg`}
+                    alt='QR Code Image'
+                    height={100}
+                    width={100}
+                    className='w-50 h-auto'
+                />
+            </div>
             <h1>Item Details Page</h1>
             <p>This page will display details for a specific item.</p>
             <p>Item ID: {data.s_itemIdentifier}</p>
@@ -35,5 +57,7 @@ export default function ItemDetailsPage() {
             <p>Recipient Reached? {data.s_recipientReached ? 'Yes' : 'No'}</p>
             {/* Additional components and logic to fetch and display item details can be added here */}
         </div>
+    ) : (
+        <div>test</div>
     );
 }
