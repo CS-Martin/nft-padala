@@ -20,7 +20,7 @@ const interFont = Inter({
 
 export const metadata: Metadata = {
     title: 'NFT Padala',
-    description: 'Edit here your description',
+    description: 'Send your items in a smart and secure way.',
 };
 
 export default async function RootLayout({

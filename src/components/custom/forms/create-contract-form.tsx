@@ -175,7 +175,7 @@ export const CreateContractForm = () => {
                         <Button
                             className='w-full hover:bg-blue-500 bg-blue-400 mt-3'
                             asChild>
-                            <Link href={'/'}>Go back</Link>
+                            <Link href={'/dashboard'}>Go back</Link>
                         </Button>
                     </div>
                 )}

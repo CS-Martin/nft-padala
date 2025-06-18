@@ -109,8 +109,10 @@ function Hero() {
                         />
                     </AnnouncementTitle>
                 </Announcement>
-                <h1>Send Everything in a Smart Way</h1>
-                <p className='text-zinc-300'>Blockchain-powered NFT delivery fast, secure, and trackable.</p>
+                <h1>
+                    Send your items in a smart <br /> and secured way
+                </h1>
+                <p className='text-zinc-300'>Experience fast, secure, and trackable delivery powered by blockchain and NFTs.</p>
                 <div className='flex items-center gap-2'>
                     <Link href='/dashboard'>
                         <NeumorphButton intent='primary'>
