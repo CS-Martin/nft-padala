@@ -14,7 +14,6 @@ import { Abi } from 'viem';
 import { TransactionTableColumns } from './transaction-table-columns';
 import { useRouter } from 'next/navigation';
 import { ItemDetailsResponse } from '@/types/item-details.type';
-import { error } from 'console';
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
