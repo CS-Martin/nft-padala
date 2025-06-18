@@ -12,10 +12,10 @@ import { useWriteContract } from 'wagmi';
 import { abi } from '@/utils/abi';
 import { QRGenerator } from '../qr-generator';
 import Link from 'next/link';
-import NeumorphButton from '@/components/ui/neumorph-button';
 import { generateUID } from '@/lib/utils';
 import { Copy } from 'lucide-react';
 import { toast } from 'sonner';
+import { parseGwei } from 'viem';
 
 const createContractFormSchema = z.object({
     realId: z.string().min(1, 'Real ID is required'),
@@ -68,6 +68,9 @@ export const CreateContractForm = () => {
                 address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
                 functionName: 'mint',
                 args: [data],
+                gas: 3000000n,
+                maxFeePerGas: parseGwei('2'),
+                maxPriorityFeePerGas: parseGwei('1'),
             });
 
             if (result) {

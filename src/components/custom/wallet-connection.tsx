@@ -38,7 +38,7 @@ export const WalletConnection = ({ walletStatus, connectWallet, disconnectWallet
     );
 };
 
-function AvatarButton({ walletStatus, connectWallet, disconnectWallet, isLoading }: WalletConnectionProps) {
+function AvatarButton({ walletStatus, disconnectWallet, isLoading }: WalletConnectionProps) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className='flex'>

@@ -23,11 +23,7 @@ interface DataTableProps<TData, TValue> {
 export default function TransactionDataTable() {
     const walletAddress = useWalletStore((state) => state.walletStatus.address);
 
-    const {
-        data: itemDetails,
-        isLoading: isLoadingDetails,
-        error: errorDetails,
-    } = useReadContracts({
+    const { data: itemDetails, error: errorDetails } = useReadContracts({
         contracts: [
             {
                 abi: abi as Abi,
@@ -40,7 +36,11 @@ export default function TransactionDataTable() {
             enabled: !!walletAddress,
         },
     });
-    console.log('itemDetail', itemDetails);
+
+    if (errorDetails) {
+        console.error('Error fetching item details:', errorDetails);
+    }
+
     const columns = TransactionTableColumns();
 
     return (

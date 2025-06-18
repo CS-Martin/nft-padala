@@ -10,8 +10,6 @@ import { abi } from '@/utils/abi';
 import { useReadContracts } from 'wagmi';
 import { Label } from '@/components/ui/label';
 import { Abi } from 'viem';
-import { useRouter } from 'next/navigation';
-import { ItemDetailsResponse } from '@/types/item-details.type';
 import { HistoryTableColumns } from './history-table-columns';
 
 interface DataTableProps<TData, TValue> {
@@ -20,11 +18,7 @@ interface DataTableProps<TData, TValue> {
 }
 
 export default function HistoryDataTable({ realId }: { realId: string }) {
-    const {
-        data: itemHistory,
-        isLoading: isLoadingDetails,
-        error: errorDetails,
-    } = useReadContracts({
+    const { data: itemHistory, error: errorDetails } = useReadContracts({
         contracts: [
             {
                 abi: abi as Abi,
@@ -37,6 +31,10 @@ export default function HistoryDataTable({ realId }: { realId: string }) {
             enabled: !!realId,
         },
     });
+
+    if (errorDetails) {
+        console.error('Error fetching item history:', errorDetails);
+    }
 
     const columns = HistoryTableColumns();
 
@@ -64,7 +62,6 @@ export default function HistoryDataTable({ realId }: { realId: string }) {
 }
 
 export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
-    const router = useRouter();
     const [sorting, setSorting] = useState<SortingState>([]);
     const pageSize = 10;
 
