@@ -77,5 +77,19 @@ export const TransactionTableColumns = () => [
                 </Button>
             );
         },
+        cell: ({ cell }: { cell: any }) => {
+            const value = cell.getValue();
+            return value ? (
+                <div className='text-green-500 flex flex-row items-center gap-2'>
+                    <div className='rounded-full w-2 h-2 bg-green-500'></div>
+                    <small>Delivered</small>
+                </div>
+            ) : (
+                <div className='text-orange-500 flex flex-row items-center gap-2'>
+                    <div className='rounded-full w-2 h-2 bg-orange-500'></div>
+                    <small>In Progress</small>
+                </div>
+            );
+        },
     },
 ];

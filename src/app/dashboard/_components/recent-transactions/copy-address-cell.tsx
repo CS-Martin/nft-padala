@@ -30,7 +30,7 @@ export const CopyableAddressCell = ({ address }: CopyableAddressCellProps) => {
             <Button
                 variant='ghost'
                 onClick={handleCopy}
-                className='p-1 hover:bg-gray-200 rounded cursor-pointer'
+                className='p-1 hover:bg-white/15 rounded cursor-pointer'
                 title={copied ? 'Copied!' : 'Copy to clipboard'}>
                 {copied ? <Check className='w-4 h-4 text-green-500' /> : <Copy className='w-4 h-4' />}
             </Button>
