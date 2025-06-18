@@ -77,9 +77,7 @@ export default function TransferContractForm({ realId }: { realId: string | null
                         <div>
                             <Label>Your Wallet Address:</Label>
                             <Input
-                                readOnly
                                 id='to'
-                                value={walletAddress}
                                 {...register('to')}
                             />
                         </div>

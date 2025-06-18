@@ -12,6 +12,8 @@ import { useReadContract, useReadContracts } from 'wagmi';
 import { Label } from '@/components/ui/label';
 import { Abi } from 'viem';
 import { TransactionTableColumns } from './transaction-table-columns';
+import { useRouter } from 'next/navigation';
+import { ItemDetailsResponse } from '@/types/item-details.type';
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
@@ -130,6 +132,7 @@ export default function TransactionDataTable() {
 }
 
 export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
+    const router = useRouter();
     const [sorting, setSorting] = useState<SortingState>([]);
     const pageSize = 10;
 
@@ -169,6 +172,8 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
                             table.getRowModel().rows.map((row) => (
                                 <TableRow
                                     key={row.id}
+                                    className='cursor-pointer'
+                                    onClick={() => router.push(`/contract?id=${(row.original as ItemDetailsResponse).s_itemIdentifier}`)}
                                     data-state={row.getIsSelected() && 'selected'}>
                                     {row.getVisibleCells().map((cell) => (
                                         <TableCell

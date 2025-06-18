@@ -59,4 +59,18 @@ export const TransactionTableColumns = () => [
             );
         },
     },
+    {
+        accessorKey: 's_recipientReached',
+        header: ({ column }: { column: any }) => {
+            return (
+                <Button
+                    variant='ghost'
+                    onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+                    className='flex flex-row justify-between w-full rounded-sm'>
+                    Status
+                    <ArrowUpDown className='w-4 h-4 ml-2' />
+                </Button>
+            );
+        },
+    },
 ];
