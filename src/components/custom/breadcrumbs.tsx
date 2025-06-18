@@ -18,7 +18,7 @@ export const Breadcrumbs = ({ items, className }: BreadcrumbsProps) => {
                     <React.Fragment key={item.href || item.label}>
                         <BreadcrumbItem>
                             {index === items.length - 1 ? (
-                                <BreadcrumbPage>{item.label === 'Home' ? <Home className='w-5 h-5' /> : item.label}</BreadcrumbPage>
+                                <BreadcrumbPage>{item.label === 'Home' ? <Home className='w-6 h-6' /> : item.label}</BreadcrumbPage>
                             ) : (
                                 <BreadcrumbLink href={item.href}>{item.label === 'Home' ? <Home className='w-5 h-5' /> : item.label}</BreadcrumbLink>
                             )}

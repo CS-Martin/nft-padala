@@ -18,6 +18,20 @@ export const TransactionTableColumns = () => [
         },
     },
     {
+        accessorKey: 's_originAddress',
+        header: ({ column }: { column: any }) => {
+            return (
+                <Button
+                    variant='ghost'
+                    onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+                    className='flex flex-row justify-between w-full rounded-sm'>
+                    Owner
+                    <ArrowUpDown className='w-4 h-4 ml-2' />
+                </Button>
+            );
+        },
+    },
+    {
         accessorKey: 's_itemIdentifier',
         header: ({ column }: { column: any }) => {
             return (

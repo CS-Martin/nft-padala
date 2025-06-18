@@ -13,7 +13,7 @@ import { abi } from '@/utils/abi';
 import { QRGenerator } from '../qr-generator';
 import Link from 'next/link';
 import NeumorphButton from '@/components/ui/neumorph-button';
-import { generateUID, shortenedItemId } from '@/lib/utils';
+import { generateUID } from '@/lib/utils';
 import { Copy } from 'lucide-react';
 
 const createContractFormSchema = z.object({
@@ -82,7 +82,7 @@ export const CreateContractForm = () => {
     };
 
     return (
-        <div className='w-full flex flex-col md:flex-row gap-5 md:gap-10'>
+        <div className='w-full flex mt-7 flex-col md:flex-row gap-5 md:gap-10'>
             {transactionDone && (
                 <div className='md:hidden block'>
                     <QRGenerator value={`${watch('realId')}`} />
@@ -103,7 +103,7 @@ export const CreateContractForm = () => {
                                 type='text'
                                 className='mt-2 pr-8'
                                 {...register('to')}
-                                value={shortenedItemId(walletAddress || '')}
+                                value={walletAddress}
                             />
                             <button
                                 type='button'
@@ -159,6 +159,7 @@ export const CreateContractForm = () => {
                         <NeumorphButton
                             type='submit'
                             intent='primary'
+                            loading={isPending}
                             disabled={isPending}>
                             <div className='flex items-center gap-2'>Create Item</div>
                         </NeumorphButton>

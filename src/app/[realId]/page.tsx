@@ -1,7 +1,6 @@
 'use client';
 
 import { Breadcrumbs } from '@/components/custom/breadcrumbs';
-import { shortenedItemId } from '@/lib/utils';
 import { ItemDetailsResponse } from '@/types/item-details.type';
 import { abi } from '@/utils/abi';
 import Image from 'next/image';
@@ -11,8 +10,6 @@ import { useReadContract } from 'wagmi';
 export default function ItemDetailsPage() {
     const searchParams = useSearchParams();
     const realId = searchParams.get('id');
-
-    const sid = shortenedItemId(realId ?? '');
 
     const { data, isLoading } = useReadContract({
         abi: abi,
@@ -35,7 +32,7 @@ export default function ItemDetailsPage() {
                 items={[
                     { label: 'Home', href: '/' },
                     { label: 'Dashboard', href: '/dashboard' },
-                    { label: `${sid}`, href: '#' },
+                    { label: `${data.s_itemName}`, href: '#' },
                 ]}
             />
 
