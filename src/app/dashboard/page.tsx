@@ -1,4 +1,5 @@
 import { Breadcrumbs } from '@/components/custom/breadcrumbs';
+import TransactionDataTable from './_components/recent-transactions/transaction-data-table';
 
 export default function DashboardPage() {
     return (
@@ -9,6 +10,8 @@ export default function DashboardPage() {
                     { label: 'Dashboard', href: '/dashboard' },
                 ]}
             />
+            <h1>Dashboard</h1>
+            <TransactionDataTable />
         </div>
     );
 }

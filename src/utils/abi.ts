@@ -112,6 +112,13 @@ export const abi = [
         type: 'function',
     },
     {
+        inputs: [{ internalType: 'address', name: '_address', type: 'address' }],
+        name: 'getAllRealIdsByAddress',
+        outputs: [{ internalType: 'string[]', name: '', type: 'string[]' }],
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
         inputs: [{ internalType: 'uint256', name: 'tokenId', type: 'uint256' }],
         name: 'getApproved',
         outputs: [{ internalType: 'address', name: '', type: 'address' }],
