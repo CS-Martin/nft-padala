@@ -12,13 +12,13 @@ export const QRGenerator = ({ value }: { value: string }) => {
 
             try {
                 const svgString = new XMLSerializer().serializeToString(svgElement);
-                const key = `qrcodes/${crypto.randomUUID()}.svg`;
+                const key = `qrcodes/${value}.svg`;
 
                 const response = await fetch('/api/upload-qr', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        Accept: 'application/json', // Explicitly ask for JSON
+                        Accept: 'application/json',
                     },
                     body: JSON.stringify({ svg: svgString, key }),
                 });
@@ -45,7 +45,7 @@ export const QRGenerator = ({ value }: { value: string }) => {
         };
 
         uploadQrCode();
-    }, []);
+    }, [value]);
 
     return (
         <div className='flex flex-col justify-center items-center'>
@@ -54,7 +54,7 @@ export const QRGenerator = ({ value }: { value: string }) => {
                 ref={containerRef}>
                 <QRCode
                     size={256}
-                    value={value}
+                    value={`http://localhost:3000/contract/transfer?id=${value}`}
                     viewBox={`0 0 256 256`}
                     style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
                 />
