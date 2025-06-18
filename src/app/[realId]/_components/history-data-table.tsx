@@ -104,8 +104,6 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
                             table.getRowModel().rows.map((row) => (
                                 <TableRow
                                     key={row.id}
-                                    className='cursor-pointer'
-                                    onClick={() => router.push(`/contract?id=${(row.original as ItemDetailsResponse).s_itemIdentifier}`)}
                                     data-state={row.getIsSelected() && 'selected'}>
                                     {row.getVisibleCells().map((cell) => (
                                         <TableCell
