@@ -96,6 +96,7 @@ export const abi = [
         name: 'Transfer',
         type: 'event',
     },
+    { inputs: [{ internalType: 'address', name: '_address', type: 'address' }], name: 'addToWhitelist', outputs: [], stateMutability: 'nonpayable', type: 'function' },
     {
         inputs: [
             { internalType: 'address', name: 'to', type: 'address' },
@@ -239,6 +240,13 @@ export const abi = [
         type: 'function',
     },
     {
+        inputs: [{ internalType: 'address', name: '_address', type: 'address' }],
+        name: 'isWhitelisted',
+        outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
         inputs: [
             {
                 components: [
@@ -275,6 +283,7 @@ export const abi = [
         stateMutability: 'view',
         type: 'function',
     },
+    { inputs: [{ internalType: 'address', name: '_address', type: 'address' }], name: 'removeFromWhitelist', outputs: [], stateMutability: 'nonpayable', type: 'function' },
     { inputs: [], name: 'renounceOwnership', outputs: [], stateMutability: 'nonpayable', type: 'function' },
     {
         inputs: [

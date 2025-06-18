@@ -44,6 +44,7 @@ function CreatePadalaModal() {
         <Dialog>
             <DialogTrigger asChild>
                 <NeumorphButton
+                    className='cursor-pointer'
                     intent='primary'
                     size={'small'}>
                     CREATE PADALA
