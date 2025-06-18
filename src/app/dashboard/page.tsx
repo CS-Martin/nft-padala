@@ -10,7 +10,6 @@ export default function DashboardPage() {
                     { label: 'Dashboard', href: '/dashboard' },
                 ]}
             />
-            <h1>Dashboard</h1>
             <TransactionDataTable />
         </div>
     );

@@ -8,8 +8,10 @@ import { useEffect, useState } from 'react';
 import { PaginationComponent } from '@/components/custom/pagination';
 import { abi } from '@/utils/abi';
 import { useWalletStore } from '@/stores/wallet.store';
-import { useReadContract } from 'wagmi';
+import { useReadContract, useReadContracts } from 'wagmi';
 import { Label } from '@/components/ui/label';
+import { Abi } from 'viem';
+import { TransactionTableColumns } from './transaction-table-columns';
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
@@ -19,32 +21,90 @@ interface DataTableProps<TData, TValue> {
 export default function TransactionDataTable() {
     const walletAddress = useWalletStore((state) => state.walletStatus.address);
 
+    /**
+     * Fetches all `realId` values associated with a given wallet address from the smart contract.
+     *
+     * This uses the `getAllRealIdsByAddress` function defined in the contract ABI. Each `realId`
+     * is a unique string identifier representing an item or transaction tied to a user's wallet.
+     *
+     * @returns
+     * - `realIds`: An array of real ID strings (e.g. ["uuid1", "uuid2"])
+     * - `isLoadingIds`: Boolean indicating loading state
+     * - `errorIds`: Error object if request fails
+     */
     const {
         data: realIds,
-        isLoading,
-        error,
+        isLoading: isLoadingIds,
+        error: errorIds,
     } = useReadContract({
         abi: abi,
         address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
         functionName: 'getAllRealIdsByAddress',
         args: walletAddress ? [walletAddress] : undefined,
         query: {
-            enabled: !!walletAddress,
-            retry: 1,
+            enabled: !!walletAddress, // Ensures query only runs when wallet address is available
+        },
+    }) as {
+        data: string[] | undefined;
+        isLoading: boolean;
+        error: Error | null;
+    };
+
+    /**
+     * Fetches item details for each `realId` using the contract function `getItemDetailsByRealId`.
+     *
+     * This uses `useReadContracts` to batch multiple contract reads. Each real ID results in
+     * a separate contract call to fetch the corresponding item details (e.g. name, address, etc).
+     *
+     * @returns
+     * - `itemDetails`: An array of results (tuples) returned by the contract
+     * - `isLoadingDetails`: Boolean indicating loading state
+     * - `errorDetails`: Error object if any of the batched reads fail
+     */
+    const {
+        data: itemDetails,
+        isLoading: isLoadingDetails,
+        error: errorDetails,
+    } = useReadContracts({
+        contracts:
+            (realIds as string[])?.map((realId) => ({
+                abi: abi as Abi,
+                address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
+                functionName: 'getItemDetailsByRealId',
+                args: [realId],
+            })) ?? [],
+        query: {
+            enabled: !!realIds?.length, // Only run when realIds have been fetched
         },
     });
 
     useEffect(() => {
+        if (isLoadingIds || isLoadingDetails) {
+            console.log('⏳ Loading data...');
+        }
+
+        if (errorIds) {
+            console.error('❌ Failed to fetch real IDs:', errorIds.message);
+        }
+
+        if (errorDetails) {
+            console.error('❌ Failed to fetch item details:', errorDetails.message);
+        }
+
         if (realIds) {
-            console.log('✅ Fetched real IDs:', realIds);
+            console.log('✅ Real IDs:', realIds);
         }
-        if (error) {
-            console.error('❌ Error fetching real IDs:', error);
+
+        if (itemDetails) {
+            console.log('✅ Item Details:', itemDetails);
         }
-        if (!isLoading) {
-            console.log('Fetch completed');
+
+        if (!isLoadingIds && !isLoadingDetails && !errorIds && !errorDetails) {
+            console.log('✅ All data successfully fetched');
         }
-    }, [realIds, error, isLoading]);
+    }, [realIds, itemDetails, errorIds, errorDetails, isLoadingIds, isLoadingDetails]);
+
+    const columns = TransactionTableColumns();
 
     return (
         <motion.div
@@ -56,11 +116,14 @@ export default function TransactionDataTable() {
             <div className='p-5 border shadow-sm rounded-xl bg-sidebar'>
                 <div className='flex flex-row items-center justify-between pb-5 mb-5 border-b'>
                     <div>
-                        <h2 className='font-bold'>User Management</h2>
+                        <h2 className='font-bold'>Dashboard</h2>
                         <Label>Manage user roles, access, and permissions.</Label>
                     </div>
                 </div>
-                {/* <DataTable /> */}
+                <DataTable
+                    columns={columns}
+                    data={(itemDetails ?? []).map((item) => item.result)}
+                />
             </div>
         </motion.div>
     );
