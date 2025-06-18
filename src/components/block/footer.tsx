@@ -8,7 +8,7 @@ export function Footer() {
     return (
         <>
             {/* CTA */}
-            <div className='flex flex-col items-center gap-8'>
+            <div className='mt-50 flex flex-col items-center gap-8'>
                 <small className='border-b-2 border-blue-400 pb-1 uppercase'>NFT PADALA</small>
                 <h3>Ready to Send Your First NFT Padala?</h3>
                 <p className='text-zinc-300'>Don’t just own — deliver. Experience digital delivery reimagined.</p>
