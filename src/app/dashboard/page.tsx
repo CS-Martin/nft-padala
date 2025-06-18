@@ -26,13 +26,7 @@ export default function DashboardPage() {
                         placeholder='Search by item or trait'
                         className='w-[350px]'
                     />
-                    {/* <Link href='/contract/create'>
-                        <NeumorphButton
-                            intent='primary'
-                            size={'small'}>
-                            CREATE PADALA
-                        </NeumorphButton>
-                    </Link> */}
+
                     <CreatePadalaModal />
                 </div>
                 <div className='mt-8'>

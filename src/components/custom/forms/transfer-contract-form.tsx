@@ -27,7 +27,7 @@ export default function TransferContractForm({ realId }: { realId: string | null
         register,
         handleSubmit,
         // watch,
-        // formState: { errors },
+        formState: { errors },
         // setValue,
     } = useForm<TransferContractFormInputs>({
         resolver: zodResolver(transferContractFormSchema),
@@ -66,9 +66,11 @@ export default function TransferContractForm({ realId }: { realId: string | null
 
     return (
         <>
-            {realId ? (
+            {realId && walletAddress ? (
                 <div className='w-full flex flex-col gap-4'>
-                    <form onSubmit={handleSubmit(handleTransfer)}>
+                    <form
+                        onSubmit={handleSubmit(handleTransfer)}
+                        className='flex flex-col gap-4'>
                         <div>
                             <Label>Item ID:</Label>
                             <Input
@@ -76,6 +78,8 @@ export default function TransferContractForm({ realId }: { realId: string | null
                                 value={realId}
                                 readOnly
                             />
+                            <small className='text-xs text-muted-foreground'>This is the unique ID of the item you’re transferring.</small>
+                            {errors.realId && <p className='text-red-400 mt-1'>{errors.realId.message}</p>}
                         </div>
 
                         <div>
@@ -83,7 +87,10 @@ export default function TransferContractForm({ realId }: { realId: string | null
                             <Input
                                 id='to'
                                 {...register('to')}
+                                defaultValue={walletAddress}
                             />
+                            <small className='text-xs text-muted-foreground'>You can modify this if you want to transfer from a different wallet.</small>
+                            {errors.to && <small className='text-red-400 mt-1'>{errors.to.message}</small>}
                         </div>
 
                         {!transferContractDone && (
@@ -94,16 +101,17 @@ export default function TransferContractForm({ realId }: { realId: string | null
                             </Button>
                         )}
                     </form>
+
                     {transferContractDone && (
                         <Button
                             asChild
-                            variant={'default'}>
-                            <Link href={'/'}>Go back</Link>
+                            variant='default'>
+                            <Link href='/'>Go back</Link>
                         </Button>
                     )}
                 </div>
             ) : (
-                <div className='text-red-500'>Real ID is required to create a transfer contract.</div>
+                <div className='text-red-500 p-5 bg-red-300 rounded'>Real ID is required to create a transfer contract.</div>
             )}
         </>
     );
