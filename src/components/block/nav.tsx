@@ -57,15 +57,13 @@ export default function NavBar() {
             <Logo />
 
             <div className='flex items-center gap-2'>
-            
-
                 <WalletConnection
                     walletStatus={walletStatus}
                     connectWallet={connectWallet}
                     disconnectWallet={disconnectWallet}
                     isLoading={isConnecting}
                 />
-                <ModeToggle />
+                {/* <ModeToggle /> */}
             </div>
         </nav>
     );
