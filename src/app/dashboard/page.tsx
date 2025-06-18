@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import NeumorphButton from '@/components/ui/neumorph-button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { CreateContractForm } from '@/components/custom/forms/create-contract-form';
+import { DiamondPlus } from 'lucide-react';
 
 export default function DashboardPage() {
     return (
@@ -47,7 +48,10 @@ function CreatePadalaModal() {
                     className='cursor-pointer'
                     intent='primary'
                     size={'small'}>
-                    CREATE PADALA
+                    <span className='flex items-center gap-1'>
+                        <DiamondPlus size={18} />
+                        CREATE PADALA
+                    </span>
                 </NeumorphButton>
             </DialogTrigger>
             <DialogContent className='p-10'>

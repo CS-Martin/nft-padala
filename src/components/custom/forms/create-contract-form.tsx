@@ -13,9 +13,10 @@ import { abi } from '@/utils/abi';
 import { QRGenerator } from '../qr-generator';
 import Link from 'next/link';
 import { generateUID } from '@/lib/utils';
-import { Copy } from 'lucide-react';
+import { Copy, DiamondPlus } from 'lucide-react';
 import { toast } from 'sonner';
 import { parseGwei } from 'viem';
+import NeumorphButton from '@/components/ui/neumorph-button';
 
 const createContractFormSchema = z.object({
     realId: z.string().min(1, 'Real ID is required'),
@@ -161,12 +162,15 @@ export const CreateContractForm = () => {
                     </div>
 
                     {!transactionDone && (
-                        <Button
-                            type='submit'
-                            disabled={isPending}
-                            className='text-white uppercase'>
-                            Create Item
-                        </Button>
+                        <NeumorphButton
+                            className='cursor-pointer'
+                            intent='primary'
+                            size={'small'}>
+                            <span className='flex items-center gap-1'>
+                                <DiamondPlus size={18} />
+                                CREATE PADALA
+                            </span>
+                        </NeumorphButton>
                     )}
                 </form>
 
