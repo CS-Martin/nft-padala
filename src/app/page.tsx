@@ -112,7 +112,7 @@ function Hero() {
                 <h1>Send Everything in a Smart Way</h1>
                 <p className='text-zinc-300'>Blockchain-powered NFT delivery fast, secure, and trackable.</p>
                 <div className='flex items-center gap-2'>
-                    <Link href='/contract/create'>
+                    <Link href='/dashboard'>
                         <NeumorphButton intent='primary'>
                             <div className='flex items-center gap-2'>
                                 <Package size={18} />
@@ -120,9 +120,6 @@ function Hero() {
                             </div>
                         </NeumorphButton>
                     </Link>
-                    <NeumorphButton intent='secondary'>
-                        <div className='flex items-center gap-2'>Track your padala</div>
-                    </NeumorphButton>
                 </div>
 
                 <div className='flex flex-row gap-8'>
