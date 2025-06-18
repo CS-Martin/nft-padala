@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ArrowUpDown } from 'lucide-react';
+import { ChevronsUpDown, Package } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CopyableAddressCell } from './copy-address-cell';
 
@@ -11,9 +11,11 @@ export const TransactionTableColumns = () => [
                 <Button
                     variant='ghost'
                     onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-                    className='flex flex-row justify-between w-full rounded-sm'>
-                    Item Name
-                    <ArrowUpDown className='w-4 h-4 ml-2' />
+                    className='flex flex-row justify-between w-full rounded'>
+                    <div className='flex items-center gap-3'>
+                        <Package /> Item
+                    </div>
+                    <ChevronsUpDown />
                 </Button>
             );
         },
@@ -25,24 +27,9 @@ export const TransactionTableColumns = () => [
                 <Button
                     variant='ghost'
                     onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-                    className='flex flex-row justify-between w-full rounded-sm'>
-                    Owner
-                    <ArrowUpDown className='w-4 h-4 ml-2' />
-                </Button>
-            );
-        },
-        cell: ({ cell }: { cell: any }) => <CopyableAddressCell address={cell.getValue()} />,
-    },
-    {
-        accessorKey: 's_itemIdentifier',
-        header: ({ column }: { column: any }) => {
-            return (
-                <Button
-                    variant='ghost'
-                    onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-                    className='flex flex-row justify-between w-full rounded-sm'>
-                    Item ID
-                    <ArrowUpDown className='w-4 h-4 ml-2' />
+                    className='flex flex-row justify-between w-full rounded'>
+                    Owned by
+                    <ChevronsUpDown />
                 </Button>
             );
         },
@@ -55,9 +42,9 @@ export const TransactionTableColumns = () => [
                 <Button
                     variant='ghost'
                     onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-                    className='flex flex-row justify-between w-full rounded-sm'>
+                    className='flex flex-row justify-between w-full rounded'>
                     Final Recipient
-                    <ArrowUpDown className='w-4 h-4 ml-2' />
+                    <ChevronsUpDown />
                 </Button>
             );
         },
@@ -70,9 +57,9 @@ export const TransactionTableColumns = () => [
                 <Button
                     variant='ghost'
                     onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-                    className='flex flex-row justify-between w-full rounded-sm'>
+                    className='flex flex-row justify-between w-full rounded'>
                     Location Origin
-                    <ArrowUpDown className='w-4 h-4 ml-2' />
+                    <ChevronsUpDown />
                 </Button>
             );
         },
@@ -84,9 +71,9 @@ export const TransactionTableColumns = () => [
                 <Button
                     variant='ghost'
                     onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-                    className='flex flex-row justify-between w-full rounded-sm'>
+                    className='flex flex-row justify-between w-full rounded'>
                     Status
-                    <ArrowUpDown className='w-4 h-4 ml-2' />
+                    <ChevronsUpDown />
                 </Button>
             );
         },
