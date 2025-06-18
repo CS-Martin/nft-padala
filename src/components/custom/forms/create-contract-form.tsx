@@ -15,6 +15,7 @@ import Link from 'next/link';
 import NeumorphButton from '@/components/ui/neumorph-button';
 import { generateUID } from '@/lib/utils';
 import { Copy } from 'lucide-react';
+import { toast } from 'sonner';
 
 const createContractFormSchema = z.object({
     realId: z.string().min(1, 'Real ID is required'),
@@ -73,6 +74,7 @@ export const CreateContractForm = () => {
                 console.log('Transaction sent:', result);
                 setTransactionDone(true);
                 setValue('realId', data.realId);
+                toast.success('Transaction successful! Your item has been created.');
             }
         } catch (error) {
             console.log('Error during minting process:', error);
@@ -82,7 +84,7 @@ export const CreateContractForm = () => {
     };
 
     return (
-        <div className='w-full flex mt-7 flex-col md:flex-row gap-5 md:gap-10'>
+        <div className='w-full flex flex-col md:flex-row gap-5 md:gap-10'>
             {transactionDone && (
                 <div className='md:hidden block'>
                     <QRGenerator value={`${watch('realId')}`} />
@@ -156,19 +158,17 @@ export const CreateContractForm = () => {
                     </div>
 
                     {!transactionDone && (
-                        <NeumorphButton
+                        <Button
                             type='submit'
-                            intent='primary'
-                            loading={isPending}
-                            disabled={isPending}>
+                            disabled={isPending}
+                            className='text-white uppercase'>
                             Create Item
-                        </NeumorphButton>
+                        </Button>
                     )}
                 </form>
 
                 {transactionDone && (
                     <div className='mt-4'>
-                        <p className='text-green-500'>Transaction successful! Your item has been created.</p>
                         <Button
                             className='w-full hover:bg-blue-500 bg-blue-400 mt-3'
                             asChild>
