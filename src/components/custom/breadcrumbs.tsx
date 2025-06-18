@@ -1,5 +1,5 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
-import { Home } from 'lucide-react';
+import { Home, SlashIcon } from 'lucide-react';
 import React from 'react';
 
 interface BreadcrumbsProps {
@@ -20,10 +20,15 @@ export const Breadcrumbs = ({ items, className }: BreadcrumbsProps) => {
                             {index === items.length - 1 ? (
                                 <BreadcrumbPage>{item.label === 'Home' ? <Home className='w-6 h-6' /> : item.label}</BreadcrumbPage>
                             ) : (
-                                <BreadcrumbLink href={item.href}>{item.label === 'Home' ? <Home className='w-5 h-5' /> : item.label}</BreadcrumbLink>
+                                <BreadcrumbLink href={item.href}>{item.label === 'Home' ? <Home className='w-[14px]' /> : item.label}</BreadcrumbLink>
                             )}
                         </BreadcrumbItem>
-                        {index !== items.length - 1 && <BreadcrumbSeparator />}
+
+                        {index !== items.length - 1 && (
+                            <BreadcrumbSeparator>
+                                <SlashIcon />
+                            </BreadcrumbSeparator>
+                        )}
                     </React.Fragment>
                 ))}
             </BreadcrumbList>
