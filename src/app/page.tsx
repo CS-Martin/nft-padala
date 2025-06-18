@@ -1,6 +1,7 @@
 'use client';
 
 import { Footer } from '@/components/block/footer';
+import { AuroraText } from '@/components/magicui/aurora-text';
 import { Announcement, AnnouncementTag, AnnouncementTitle } from '@/components/ui/kibo-ui/announcement';
 import NeumorphButton from '@/components/ui/neumorph-button';
 import { ArrowUpRightIcon, CircleCheck, Gift, Package, PackageCheck } from 'lucide-react';
@@ -110,7 +111,7 @@ function Hero() {
                     </AnnouncementTitle>
                 </Announcement>
                 <h1>
-                    Send your items in a smart <br /> and secured way
+                    Send your items in a <AuroraText>smart</AuroraText> <br /> and <AuroraText>secured</AuroraText> way
                 </h1>
                 <p className='text-zinc-300'>Experience fast, secure, and trackable delivery powered by blockchain and NFTs.</p>
                 <div className='flex items-center gap-2'>
