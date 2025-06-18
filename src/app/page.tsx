@@ -6,7 +6,6 @@ import { Announcement, AnnouncementTag, AnnouncementTitle } from '@/components/u
 import NeumorphButton from '@/components/ui/neumorph-button';
 import { Spotlight } from '@/components/ui/spotlight-new';
 import { ArrowUpRightIcon, CircleCheck, Gift, Package, PackageCheck } from 'lucide-react';
-import Link from 'next/link';
 
 export default function Home() {
     return (
@@ -117,14 +116,15 @@ function Hero() {
                 </h1>
                 <p className='text-zinc-300'>Experience fast, secure, and trackable delivery powered by blockchain and NFTs.</p>
                 <div className='flex items-center gap-2'>
-                    <Link href='/dashboard'>
-                        <NeumorphButton intent='primary'>
-                            <div className='flex items-center gap-2'>
-                                <Package size={18} />
-                                Send your first padala
-                            </div>
-                        </NeumorphButton>
-                    </Link>
+                    <NeumorphButton
+                        href='/dashboard'
+                        intent='primary'
+                        className='cursor-pointer'>
+                        <div className='flex items-center gap-2'>
+                            <Package size={18} />
+                            Send your first padala
+                        </div>
+                    </NeumorphButton>
                 </div>
 
                 <div className='flex flex-row gap-8'>
