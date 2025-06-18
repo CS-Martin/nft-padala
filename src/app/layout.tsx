@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Sora, Inter } from 'next/font/google';
 import './globals.css';
 import { cookieToInitialState } from 'wagmi';
 import { WagmiConfig } from '@/lib/config';
@@ -8,13 +8,13 @@ import { CustomWagmiProvider } from '@/providers/wagmi-provider';
 import { ThemeProvider } from '@/components/ui/theme-provider';
 import NavBar from '@/components/block/nav';
 
-const geistSans = Geist({
-    variable: '--font-geist-sans',
+const soraFont = Sora({
+    variable: '--font-sora',
     subsets: ['latin'],
 });
 
-const geistMono = Geist_Mono({
-    variable: '--font-geist-mono',
+const interFont = Inter({
+    variable: '--font-inter',
     subsets: ['latin'],
 });
 
@@ -36,10 +36,10 @@ export default async function RootLayout({
         <html
             lang='en'
             suppressHydrationWarning>
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+            <body className={`${soraFont.variable} ${interFont.className}`}>
                 <ThemeProvider
                     attribute='class'
-                    defaultTheme='system'
+                    defaultTheme='dark'
                     enableSystem
                     disableTransitionOnChange>
                     <CustomWagmiProvider initialState={initalState}>

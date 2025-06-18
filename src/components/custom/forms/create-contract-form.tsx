@@ -12,6 +12,7 @@ import { useWriteContract } from 'wagmi';
 import { abi } from '@/utils/abi';
 import { QRGenerator } from '../qr-generator';
 import Link from 'next/link';
+import NeumorphButton from '@/components/ui/neumorph-button';
 
 const createContractFormSchema = z.object({
     realId: z.string().min(1, 'Real ID is required'),
@@ -76,14 +77,16 @@ export const CreateContractForm = () => {
     };
 
     return (
-        <div className='w-full flex flex-col gap-4'>
+        <div className='w-full flex flex-col gap-5'>
             {transactionDone && (
                 <div>
                     <QRGenerator value={`http://localhost:3000/contract/transfer?id=${watch('realId')}`} />
                 </div>
             )}
 
-            <form onSubmit={handleSubmit(handleMint)}>
+            <form
+                onSubmit={handleSubmit(handleMint)}
+                className='flex flex-col gap-5'>
                 <div>
                     <Label className=''>My wallet address:</Label>
                     <Input
@@ -102,9 +105,10 @@ export const CreateContractForm = () => {
                         id='itemName'
                         type='text'
                         className='mt-2'
+                        placeholder='Gold'
                         {...register('itemName')}
                     />
-                    {errors.itemName && <small className='text-red-500 text-xs mt-1'>{errors.itemName.message}</small>}
+                    {errors.itemName && <small className='text-red-500 mt-1'>{errors.itemName.message}</small>}
                 </div>
 
                 <div>
@@ -113,9 +117,10 @@ export const CreateContractForm = () => {
                         id='origin'
                         type='text'
                         className='mt-2'
+                        placeholder='0x...'
                         {...register('locationOrigin')}
                     />
-                    {errors.locationOrigin && <small className='text-red-500 text-xs mt-1'>{errors.locationOrigin.message}</small>}
+                    {errors.locationOrigin && <small className='text-red-500 mt-1'>{errors.locationOrigin.message}</small>}
                 </div>
 
                 <div>
@@ -124,18 +129,19 @@ export const CreateContractForm = () => {
                         id='finalRecipient'
                         type='text'
                         className='mt-2'
+                        placeholder='0x...'
                         {...register('finalRecipient')}
                     />
-                    {errors.finalRecipient && <small className='text-red-500 text-xs mt-1'>{errors.finalRecipient.message}</small>}
+                    {errors.finalRecipient && <small className='text-red-500 mt-1'>{errors.finalRecipient.message}</small>}
                 </div>
 
                 {!transactionDone && (
-                    <Button
+                    <NeumorphButton
                         type='submit'
-                        className='cursor-pointer bg-blue-400 hover:bg-blue-500 w-full mt-3'
+                        intent='primary'
                         disabled={isPending}>
-                        Create Item
-                    </Button>
+                        <div className='flex items-center gap-2'>Create Item</div>
+                    </NeumorphButton>
                 )}
             </form>
 

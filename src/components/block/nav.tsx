@@ -1,18 +1,35 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Button } from '../ui/button';
-import Link from 'next/link';
 import Logo from './logo';
-import { ModeToggle } from './mode-toggle';
-import { WalletMinimal } from 'lucide-react';
-import { TextureButton } from '../ui/texture-button';
-import NeumorphButton from '../ui/neumorph-button';
 import { WalletConnection } from '../custom/wallet-connection';
 import { injected, useAccount, useConnect, useDisconnect } from 'wagmi';
 import { useWalletStore } from '@/stores/wallet.store';
+import { Github } from 'lucide-react';
+import { Button } from '../ui/button';
+import Link from 'next/link';
 
 export default function NavBar() {
+    return (
+        <nav className='h-[60px] w-full border-b flex items-center justify-between px-[20px] lg:px-[100px] 2xl:px-[200px]'>
+            <Logo />
+
+            <div className='flex items-center gap-2'>
+                <WalletButton />
+                <Button
+                    size='icon'
+                    variant={'outline'}
+                    asChild>
+                    <Link href=''>
+                        <Github />
+                    </Link>
+                </Button>
+            </div>
+        </nav>
+    );
+}
+
+function WalletButton() {
     const { isConnected, address } = useAccount();
     const { connect } = useConnect();
     const { disconnect } = useDisconnect();
@@ -52,21 +69,13 @@ export default function NavBar() {
             resetWalletStatus();
         }
     }, [isConnected, address, setWalletStatus, resetWalletStatus]);
+
     return (
-        <nav className='h-[60px] w-full border-b flex items-center justify-between px-[20px] lg:px-[100px] 2xl:px-[200px]'>
-            <Logo />
-
-            <div className='flex items-center gap-2'>
-            
-
-                <WalletConnection
-                    walletStatus={walletStatus}
-                    connectWallet={connectWallet}
-                    disconnectWallet={disconnectWallet}
-                    isLoading={isConnecting}
-                />
-                <ModeToggle />
-            </div>
-        </nav>
+        <WalletConnection
+            walletStatus={walletStatus}
+            connectWallet={connectWallet}
+            disconnectWallet={disconnectWallet}
+            isLoading={isConnecting}
+        />
     );
 }
