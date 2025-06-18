@@ -4,6 +4,7 @@ import { Footer } from '@/components/block/footer';
 import { AuroraText } from '@/components/magicui/aurora-text';
 import { Announcement, AnnouncementTag, AnnouncementTitle } from '@/components/ui/kibo-ui/announcement';
 import NeumorphButton from '@/components/ui/neumorph-button';
+import { Spotlight } from '@/components/ui/spotlight-new';
 import { ArrowUpRightIcon, CircleCheck, Gift, Package, PackageCheck } from 'lucide-react';
 import Link from 'next/link';
 
@@ -98,6 +99,7 @@ export default function Home() {
 function Hero() {
     return (
         <section className='h-[750px] flex items-center justify-center'>
+            <Spotlight />
             {/* Left */}
             <div className='flex flex-col gap-8 justify-center items-center text-center'>
                 <Announcement>
