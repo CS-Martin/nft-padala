@@ -1,9 +1,12 @@
 'use client';
 import QRCode from 'react-qr-code';
 import { useEffect, useRef } from 'react';
+import { getBaseUrl } from '@/lib/utils';
 
 export const QRGenerator = ({ value }: { value: string }) => {
     const containerRef = useRef<HTMLDivElement>(null);
+
+    const baseUrl = getBaseUrl();
 
     useEffect(() => {
         const uploadQrCode = async () => {
@@ -54,7 +57,7 @@ export const QRGenerator = ({ value }: { value: string }) => {
                 ref={containerRef}>
                 <QRCode
                     size={256}
-                    value={`http://localhost:3000/contract/transfer?id=${value}`}
+                    value={`${baseUrl}/contract/transfer?id=${value}`}
                     viewBox={`0 0 256 256`}
                     style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
                 />
