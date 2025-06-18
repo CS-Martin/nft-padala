@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ArrowUpDown } from 'lucide-react';
+import { ArrowUpDown, Copy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { shortenedItemId } from '@/lib/utils';
+import { CopyableAddressCell } from './copy-address-cell';
 
 export const TransactionTableColumns = () => [
     {
@@ -30,6 +32,7 @@ export const TransactionTableColumns = () => [
                 </Button>
             );
         },
+        cell: ({ cell }: { cell: any }) => <CopyableAddressCell address={cell.getValue()} />,
     },
     {
         accessorKey: 's_itemIdentifier',
@@ -44,6 +47,7 @@ export const TransactionTableColumns = () => [
                 </Button>
             );
         },
+        cell: ({ cell }: { cell: any }) => <CopyableAddressCell address={cell.getValue()} />,
     },
     {
         accessorKey: 's_finalRecipient',
@@ -58,6 +62,7 @@ export const TransactionTableColumns = () => [
                 </Button>
             );
         },
+        cell: ({ cell }: { cell: any }) => <CopyableAddressCell address={cell.getValue()} />,
     },
     {
         accessorKey: 's_locationOrigin',

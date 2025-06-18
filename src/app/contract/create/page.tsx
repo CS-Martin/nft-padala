@@ -7,6 +7,7 @@ export default function ContractPage() {
             <Breadcrumbs
                 items={[
                     { label: 'Home', href: '/' },
+                    { label: 'Dashboard', href: '/dashboard' },
                     { label: 'Contract', href: '#' },
                     { label: 'Create', href: '/contract/create' },
                 ]}

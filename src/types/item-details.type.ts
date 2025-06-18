@@ -3,5 +3,6 @@ export type ItemDetailsResponse = {
     s_locationOrigin: string;
     s_finalRecipient: string;
     s_itemIdentifier: string;
+    s_originAddress: string;
     s_recipientReached: boolean;
 };
