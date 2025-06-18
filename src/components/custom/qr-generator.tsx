@@ -60,7 +60,7 @@ export const QRGenerator = ({ value }: { value: string }) => {
                 />
             </div>
             <small>{value}</small>
-            <p className='text-center text-white mt-4'>Scan the QR code to access the contract page</p>
+            <p className='text-center mt-4'>Scan the QR code to access the contract page</p>
         </div>
     );
 };
