@@ -46,10 +46,10 @@ export default function HistoryDataTable({ realId }: { realId: string }) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}>
             <div className='p-5 border shadow-sm rounded-xl bg-sidebar'>
-                <div className='flex flex-row items-center justify-between pb-5 mb-5 border-b'>
+                <div className='flex flex-row items-center justify-between pb-3 mb-5 border-b'>
                     <div>
-                        <h2 className='font-bold'>history</h2>
-                        <Label>Manage user roles, access, and permissions.</Label>
+                        <h4 className='font-bold'>Transfer History</h4>
+                        <Label className='text-muted-foreground text-sm mt-3'>Track all transfers and ownership changes</Label>
                     </div>
                 </div>
                 <DataTable
@@ -78,7 +78,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
     });
 
     return (
-        <div className='relative overflow-hidden h-[calc(100vh-230px)]'>
+        <div className='relative overflow-hidden h-[calc(100dvh-350px)]'>
             <div className='h-[85%] overflow-y-auto border rounded-lg'>
                 <Table>
                     <TableHeader className='sticky top-0 z-10 bg-sidebar'>

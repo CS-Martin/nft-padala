@@ -41,39 +41,10 @@ export default function ItemDetailsPage() {
                 />
             </div>
 
-            <div className='mt-8 relative w-[800px] rounded-2xl border p-7 shadow-xl'>
-                <ShineBorder shineColor={['#45e670', '#00ff99', '#62ff00']} />
-
-                <div className='flex justify-between items-center'>
-                    <span className='text-xs text-zinc-400 flex gap-2 items-center'>item_{data.s_itemIdentifier}</span>
-                    <div className='flex items-center justify-center'>
-                        <div className={`absolute animate-ping flex items-center justify-center h-3 w-3 rounded-full 'bg-green-500`}></div>
-                        <div className={`absolute h-3 w-3 rounded-full bg-green-500`}></div>
-                    </div>
-                </div>
-                <div className='flex items-center justify-between'>
-                    <div>
-                        <h3 className='mt-10 mb-1 flex items-center gap-2'>
-                            <Package size={24} /> {data.s_itemName}
-                        </h3>
-                        <p className='text-sm pb-8 text-zinc-200 mb-4'>{data.s_locationOrigin}</p>
-                    </div>
-                    <Image
-                        src={`${(process.env.NEXT_PUBLIC_R2_BUCKET_PUBLIC_URL ?? '') + '/qrcodes/' + realId}.svg`}
-                        alt='QR Code Image'
-                        height={100}
-                        width={100}
-                        className='w-50 h-auto'
-                    />
-                </div>
-
-                <span className='text-sm text-zinc-400 font-medium mb-1'>Recipient Reached? {data.s_recipientReached ? 'Yes' : 'No'}</span>
-                <hr className='mt-2' />
-                <div className='mt-2 text-[11px] text-zinc-700 flex justify-between'>
-                    <span>finalrecipient_{data.s_finalRecipient}</span>
-                    <span>recipient </span>
-                </div>
-            </div>
+            <NFTCard
+                data={data}
+                realId={realId}
+            />
 
             {/* Table */}
             <HistoryDataTable realId={realId} />
@@ -82,3 +53,56 @@ export default function ItemDetailsPage() {
         <div>test</div>
     );
 }
+
+const NFTCard = ({ data, realId }: { data: ItemDetailsResponse; realId: string }) => {
+    return (
+        <div className='mt-8 relative md:w-[800px] rounded-2xl border p-7 shadow-xl'>
+            <ShineBorder shineColor={['#45e670', '#00ff99', '#62ff00']} />
+
+            <div className='flex justify-between items-center'>
+                <span className='text-xs text-zinc-400 flex gap-2 items-center'>item_{data.s_itemIdentifier}</span>
+                <div className='flex items-center justify-center'>
+                    <div className={`absolute animate-ping flex items-center justify-center h-3 w-3 rounded-full 'bg-green-500`}></div>
+                    <div className={`absolute h-3 w-3 rounded-full bg-green-500`}></div>
+                </div>
+            </div>
+            <div className='flex md:flex-row flex-col items-center justify-between'>
+                <div>
+                    <h3 className='mt-10 mb-1 flex items-center gap-2'>
+                        <Package size={24} /> {data.s_itemName}
+                    </h3>
+                    <p className='text-sm md:pb-8 text-zinc-200 mb-4'>{data.s_locationOrigin}</p>
+                </div>
+                <div className='border p-3 rounded-lg'>
+                    <Image
+                        src={`${(process.env.NEXT_PUBLIC_R2_BUCKET_PUBLIC_URL ?? '') + '/qrcodes/' + realId}.svg`}
+                        alt='QR Code Image'
+                        height={100}
+                        width={100}
+                        className='w-50 h-auto'
+                    />
+                </div>
+            </div>
+
+            <span className='flex flex-row mt-5 gap-2 text-zinc-400 font-medium mb-1'>
+                <span>Delivery status:</span>
+                {data.s_recipientReached ? (
+                    <div className='text-green-500 flex flex-row items-center gap-2'>
+                        <div className='rounded-full w-2 h-2 bg-green-500'></div>
+                        <p>Delivered</p>
+                    </div>
+                ) : (
+                    <div className='text-orange-500 flex flex-row items-center gap-2'>
+                        <div className='rounded-full w-2 h-2 bg-orange-500'></div>
+                        <p>In Progress</p>
+                    </div>
+                )}
+            </span>
+
+            <hr className='mt-2' />
+            <div className='mt-2 text-[11px] text-wrap text-zinc-700 '>
+                <span>finalrecipient_{data.s_finalRecipient}</span>
+            </div>
+        </div>
+    );
+};
