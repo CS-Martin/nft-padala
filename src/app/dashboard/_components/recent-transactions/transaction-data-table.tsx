@@ -45,23 +45,14 @@ export default function TransactionDataTable() {
 
     return (
         <motion.div
-            className='px-5 mt-5'
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}>
-            <div className='p-5 border shadow-sm rounded-xl bg-sidebar'>
-                <div className='flex flex-row items-center justify-between pb-5 mb-5 border-b'>
-                    <div>
-                        <h2 className='font-bold'>Dashboard</h2>
-                        <Label>Manage user roles, access, and permissions.</Label>
-                    </div>
-                </div>
-                <DataTable
-                    columns={columns}
-                    data={itemDetails ? itemDetails.flatMap((item) => item.result) : []}
-                />
-            </div>
+            <DataTable
+                columns={columns}
+                data={itemDetails ? itemDetails.flatMap((item) => item.result) : []}
+            />
         </motion.div>
     );
 }
@@ -84,8 +75,8 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
     });
 
     return (
-        <div className='relative overflow-hidden h-[calc(100vh-230px)]'>
-            <div className='h-[85%] overflow-y-auto border rounded-lg'>
+        <div className='relative overflow-hidden'>
+            <div className='overflow-y-auto border rounded'>
                 <Table>
                     <TableHeader className='sticky top-0 z-10 bg-sidebar'>
                         {table.getHeaderGroups().map((headerGroup) => (
@@ -124,7 +115,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
                                 <TableCell
                                     colSpan={columns.length}
                                     className='text-center h-28'>
-                                    No results.
+                                    No results
                                 </TableCell>
                             </TableRow>
                         )}
