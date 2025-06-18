@@ -2,10 +2,11 @@ import { DeleteObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client
 
 // import { logger } from '@/helpers/logger';
 
-// if (!process.env.BUCKET_NAME) {
-//     logger.error('Bucket name is missing');
-//     throw new Error('R2 bucket name is not configured');
-// }
+// Corrected environment check
+if (!process.env.R2_BUCKET_NAME) {
+    console.error('R2 bucket name is not configured');
+    throw new Error('R2 bucket name is not configured');
+}
 
 /**
  * S3 service class for managing file operations with Cloudflare R2 storage.
@@ -27,15 +28,15 @@ export class S3Service {
     private publicUrl: string;
 
     constructor() {
-        this.bucketName = process.env.R2_BUCKET_NAME || '';
-        this.publicUrl = process.env.BUCKET_PUBLIC_URL || '';
+        this.bucketName = process.env.R2_BUCKET_NAME!;
+        this.publicUrl = process.env.BUCKET_PUBLIC_URL!;
 
         this.s3Client = new S3Client({
             region: 'auto',
             endpoint: process.env.R2_BUCKET_ENDPOINT,
             credentials: {
-                accessKeyId: process.env.R2_ACCESS_KEY_ID || '',
-                secretAccessKey: process.env.R2_SECRET_ACCESS_KEY || '',
+                accessKeyId: process.env.R2_ACCESS_KEY_ID!,
+                secretAccessKey: process.env.R2_SECRET_ACCESS_KEY!,
             },
         });
     }
@@ -53,6 +54,7 @@ export class S3Service {
      * @throws Error if the upload operation fails
      */
     async uploadFile(file: File, key: string): Promise<string> {
+        console.log('Bucket Name:', this.bucketName);
         try {
             const arrayBuffer = await file.arrayBuffer();
             const command = new PutObjectCommand({
@@ -66,7 +68,25 @@ export class S3Service {
             return `${this.publicUrl}/${key}`;
         } catch (error) {
             // logger.error('Failed to upload file to R2:', error as Error);
-            throw new Error('Failed to upload file', error as Error);
+            console.error('Failed to upload file to R2:', error); // 👈 important!
+            throw new Error('Failed to upload file');
+        }
+    }
+
+    async uploadBuffer(buffer: Buffer, key: string, contentType: string): Promise<string> {
+        try {
+            const command = new PutObjectCommand({
+                Bucket: this.bucketName,
+                Key: key,
+                Body: buffer,
+                ContentType: contentType,
+            });
+
+            await this.s3Client.send(command);
+            return `${this.publicUrl}/${key}`;
+        } catch (error) {
+            console.error('R2 upload failed:', error);
+            throw new Error('File upload failed');
         }
     }
 
