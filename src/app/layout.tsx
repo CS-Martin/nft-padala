@@ -6,6 +6,7 @@ import { WagmiConfig } from '@/lib/config';
 import { headers } from 'next/headers';
 import { CustomWagmiProvider } from '@/providers/wagmi-provider';
 import NavBar from '@/components/block/nav';
+import { Toaster } from '@/components/ui/sonner';
 
 const soraFont = Sora({
     variable: '--font-sora',
@@ -39,6 +40,10 @@ export default async function RootLayout({
                 <CustomWagmiProvider initialState={initalState}>
                     <NavBar />
                     {children}
+                    <Toaster
+                        position='top-center'
+                        richColors
+                    />
                 </CustomWagmiProvider>
             </body>
         </html>
