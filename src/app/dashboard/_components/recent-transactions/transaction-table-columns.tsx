@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ArrowUpDown, Copy } from 'lucide-react';
+import { ArrowUpDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { shortenedItemId } from '@/lib/utils';
 import { CopyableAddressCell } from './copy-address-cell';
 
 export const TransactionTableColumns = () => [

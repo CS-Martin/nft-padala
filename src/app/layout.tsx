@@ -5,7 +5,6 @@ import { cookieToInitialState } from 'wagmi';
 import { WagmiConfig } from '@/lib/config';
 import { headers } from 'next/headers';
 import { CustomWagmiProvider } from '@/providers/wagmi-provider';
-import { ThemeProvider } from '@/components/ui/theme-provider';
 import NavBar from '@/components/block/nav';
 
 const soraFont = Sora({
@@ -37,16 +36,10 @@ export default async function RootLayout({
             lang='en'
             suppressHydrationWarning>
             <body className={`${soraFont.variable} ${interFont.className}`}>
-                <ThemeProvider
-                    attribute='class'
-                    defaultTheme='dark'
-                    enableSystem
-                    disableTransitionOnChange>
-                    <CustomWagmiProvider initialState={initalState}>
-                        <NavBar />
-                        {children}
-                    </CustomWagmiProvider>
-                </ThemeProvider>
+                <CustomWagmiProvider initialState={initalState}>
+                    <NavBar />
+                    {children}
+                </CustomWagmiProvider>
             </body>
         </html>
     );
