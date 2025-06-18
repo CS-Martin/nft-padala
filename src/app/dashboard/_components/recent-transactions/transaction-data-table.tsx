@@ -9,7 +9,6 @@ import { PaginationComponent } from '@/components/custom/pagination';
 import { abi } from '@/utils/abi';
 import { useWalletStore } from '@/stores/wallet.store';
 import { useReadContracts } from 'wagmi';
-import { Label } from '@/components/ui/label';
 import { Abi } from 'viem';
 import { TransactionTableColumns } from './transaction-table-columns';
 import { useRouter } from 'next/navigation';

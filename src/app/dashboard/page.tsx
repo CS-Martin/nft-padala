@@ -5,8 +5,7 @@ import TransactionDataTable from './_components/recent-transactions/transaction-
 import { Footer } from '@/components/block/footer';
 import { Input } from '@/components/ui/input';
 import NeumorphButton from '@/components/ui/neumorph-button';
-import Link from 'next/link';
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { CreateContractForm } from '@/components/custom/forms/create-contract-form';
 
 export default function DashboardPage() {
