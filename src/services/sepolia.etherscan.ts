@@ -21,12 +21,6 @@ export interface EtherscanTransaction {
     functionName: string;
 }
 
-interface EtherscanResponse {
-    status: string;
-    message: string;
-    result: EtherscanTransaction[];
-}
-
 export class SepoliaEtherscanService {
     private readonly API_KEY = 'FTPIYFYVYV3YDDAPF5Q3S579KXH6J3RIBQ';
     private readonly BASE_URL = 'https://api-sepolia.etherscan.io/api';
