@@ -163,6 +163,8 @@ export const CreateContractForm = () => {
 
                     {!transactionDone && (
                         <NeumorphButton
+                            loading={isPending}
+                            disabled={isPending}
                             className='cursor-pointer'
                             intent='primary'
                             size={'small'}>
