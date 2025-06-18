@@ -2,8 +2,12 @@ import { CreateContractForm } from '@/components/custom/forms/create-contract-fo
 
 export default function ContractPage() {
     return (
-        <div className='min-h-screen pt-20 px-5'>
-            <CreateContractForm />
-        </div>
+        <>
+            <main className='h-dvh flex items-center justify-center'>
+                <div className='border p-10 rounded-xl w-[350px]'>
+                    <CreateContractForm />
+                </div>
+            </main>
+        </>
     );
 }
