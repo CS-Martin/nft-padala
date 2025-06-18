@@ -42,7 +42,7 @@ export default function HistoryDataTable({ realId }: { realId: string }) {
 
     return (
         <motion.div
-            className='px-5 mt-5'
+            className='mt-8'
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
