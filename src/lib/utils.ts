@@ -12,7 +12,7 @@ export function generateUID() {
     return `${crypto.randomUUID()}-${dateString}`;
 }
 
-export function shortenedItemId(id: string | null, startLength = 10, endLength = 6): string {
+export function shortenedItemId(id: string, startLength = 10, endLength = 6): string {
     if (!id || id.length <= startLength + endLength) return id;
     return `${id.slice(0, startLength)}...${id.slice(-endLength)}`;
 }

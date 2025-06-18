@@ -12,7 +12,7 @@ export default function ItemDetailsPage() {
     const searchParams = useSearchParams();
     const realId = searchParams.get('id');
 
-    const sid = shortenedItemId(realId);
+    const sid = shortenedItemId(realId ?? '');
 
     const { data, isLoading } = useReadContract({
         abi: abi,
@@ -35,10 +35,10 @@ export default function ItemDetailsPage() {
                 items={[
                     { label: 'Home', href: '/' },
                     { label: 'Dashboard', href: '/dashboard' },
-                    { label: 'Contract', href: '/dashboard' },
                     { label: `${sid}`, href: '#' },
                 ]}
             />
+
             <div className='border w-fit p-5 rounded-lg'>
                 <Image
                     src={`${(process.env.NEXT_PUBLIC_R2_BUCKET_PUBLIC_URL ?? '') + '/qrcodes/' + realId}.svg`}

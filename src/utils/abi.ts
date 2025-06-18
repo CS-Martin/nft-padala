@@ -166,11 +166,54 @@ export const abi = [
         type: 'function',
     },
     {
+        inputs: [{ internalType: 'address', name: '_address', type: 'address' }],
+        name: 'getItemDetailsByAddress',
+        outputs: [
+            {
+                components: [
+                    { internalType: 'address', name: 's_originAddress', type: 'address' },
+                    { internalType: 'string', name: 's_itemName', type: 'string' },
+                    { internalType: 'string', name: 's_locationOrigin', type: 'string' },
+                    { internalType: 'address', name: 's_finalRecipient', type: 'address' },
+                    { internalType: 'string', name: 's_itemIdentifier', type: 'string' },
+                    { internalType: 'bool', name: 's_recipientReached', type: 'bool' },
+                ],
+                internalType: 'struct RealWorldItemNFT.ItemDetails[]',
+                name: '',
+                type: 'tuple[]',
+            },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
+        inputs: [{ internalType: 'address', name: '_address', type: 'address' }],
+        name: 'getItemDetailsByOriginAddress',
+        outputs: [
+            {
+                components: [
+                    { internalType: 'address', name: 's_originAddress', type: 'address' },
+                    { internalType: 'string', name: 's_itemName', type: 'string' },
+                    { internalType: 'string', name: 's_locationOrigin', type: 'string' },
+                    { internalType: 'address', name: 's_finalRecipient', type: 'address' },
+                    { internalType: 'string', name: 's_itemIdentifier', type: 'string' },
+                    { internalType: 'bool', name: 's_recipientReached', type: 'bool' },
+                ],
+                internalType: 'struct RealWorldItemNFT.ItemDetails[]',
+                name: '',
+                type: 'tuple[]',
+            },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
         inputs: [{ internalType: 'string', name: 'realId', type: 'string' }],
         name: 'getItemDetailsByRealId',
         outputs: [
             {
                 components: [
+                    { internalType: 'address', name: 's_originAddress', type: 'address' },
                     { internalType: 'string', name: 's_itemName', type: 'string' },
                     { internalType: 'string', name: 's_locationOrigin', type: 'string' },
                     { internalType: 'address', name: 's_finalRecipient', type: 'address' },

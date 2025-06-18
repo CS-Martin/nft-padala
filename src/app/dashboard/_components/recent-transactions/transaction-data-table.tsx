@@ -76,7 +76,7 @@ export default function TransactionDataTable() {
                 args: [realId],
             })) ?? [],
         query: {
-            enabled: !!realIds?.length, // Only run when realIds have been fetched
+            enabled: !!realIds?.length,
         },
     });
 

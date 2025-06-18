@@ -81,83 +81,98 @@ export const CreateContractForm = () => {
     };
 
     return (
-        <div className='w-full flex flex-col gap-5'>
+        <div className='w-full flex flex-col md:flex-row gap-5 md:gap-10'>
             {transactionDone && (
-                <div>
+                <div className='md:hidden block'>
                     <QRGenerator value={`${watch('realId')}`} />
                 </div>
             )}
 
-            <form
-                onSubmit={handleSubmit(handleMint)}
-                className='flex flex-col gap-5'>
-                <div>{watch('realId')}</div>
-                <div>
-                    <Label className=''>My wallet address:</Label>
-                    <Input
-                        readOnly
-                        id='to'
-                        type='text'
-                        className='mt-2'
-                        {...register('to')}
-                        value={walletAddress}
-                    />
-                </div>
+            <div className='md:w-1/2'>
+                <form
+                    onSubmit={handleSubmit(handleMint)}
+                    className='flex flex-col gap-5'>
+                    <div>
+                        <Label className=''>My wallet address:</Label>
+                        <Input
+                            readOnly
+                            id='to'
+                            type='text'
+                            className='mt-2'
+                            {...register('to')}
+                            value={walletAddress}
+                        />
+                    </div>
 
-                <div>
-                    <Label className=''>Item name:</Label>
-                    <Input
-                        id='itemName'
-                        type='text'
-                        className='mt-2'
-                        placeholder='Gold'
-                        {...register('itemName')}
-                    />
-                    {errors.itemName && <small className='text-red-500 mt-1'>{errors.itemName.message}</small>}
-                </div>
+                    <div>
+                        <Label className=''>Item name:</Label>
+                        <Input
+                            id='itemName'
+                            type='text'
+                            className='mt-2'
+                            placeholder='Gold'
+                            {...register('itemName')}
+                        />
+                        {errors.itemName && <small className='text-red-500 mt-1'>{errors.itemName.message}</small>}
+                    </div>
 
-                <div>
-                    <Label className=''>Sender&apos;s address:</Label>
-                    <Input
-                        id='origin'
-                        type='text'
-                        className='mt-2'
-                        placeholder='0x...'
-                        {...register('locationOrigin')}
-                    />
-                    {errors.locationOrigin && <small className='text-red-500 mt-1'>{errors.locationOrigin.message}</small>}
-                </div>
+                    <div>
+                        <Label className=''>Sender&apos;s address:</Label>
+                        <Input
+                            id='origin'
+                            type='text'
+                            className='mt-2'
+                            placeholder='0x...'
+                            {...register('locationOrigin')}
+                        />
+                        {errors.locationOrigin && <small className='text-red-500 mt-1'>{errors.locationOrigin.message}</small>}
+                    </div>
 
-                <div>
-                    <Label className=''>Receiver&apos;s wallet address:</Label>
-                    <Input
-                        id='finalRecipient'
-                        type='text'
-                        className='mt-2'
-                        placeholder='0x...'
-                        {...register('finalRecipient')}
-                    />
-                    {errors.finalRecipient && <small className='text-red-500 mt-1'>{errors.finalRecipient.message}</small>}
-                </div>
+                    <div>
+                        <Label className=''>Receiver&apos;s wallet address:</Label>
+                        <Input
+                            id='finalRecipient'
+                            type='text'
+                            className='mt-2'
+                            placeholder='0x...'
+                            {...register('finalRecipient')}
+                        />
+                        {errors.finalRecipient && <small className='text-red-500 mt-1'>{errors.finalRecipient.message}</small>}
+                    </div>
 
-                {!transactionDone && (
-                    <NeumorphButton
-                        type='submit'
-                        intent='primary'
-                        disabled={isPending}>
-                        <div className='flex items-center gap-2'>Create Item</div>
-                    </NeumorphButton>
+                    {!transactionDone && (
+                        <NeumorphButton
+                            type='submit'
+                            intent='primary'
+                            disabled={isPending}>
+                            <div className='flex items-center gap-2'>Create Item</div>
+                        </NeumorphButton>
+                    )}
+                </form>
+
+                {transactionDone && (
+                    <div className='mt-4'>
+                        <p className='text-green-500'>Transaction successful! Your item has been created.</p>
+                        <Button
+                            className='w-full hover:bg-blue-500 bg-blue-400 mt-3'
+                            asChild>
+                            <Link href={'/'}>Go back</Link>
+                        </Button>
+                    </div>
                 )}
-            </form>
+            </div>
 
-            {transactionDone && (
-                <div className='mt-4'>
-                    <p className='text-green-500'>Transaction successful! Your item has been created.</p>
-                    <Button
-                        className='w-full hover:bg-blue-500 bg-blue-400 mt-3'
-                        asChild>
-                        <Link href={'/'}>Go back</Link>
-                    </Button>
+            {transactionDone ? (
+                <div className='w-1/2 hidden md:block'>
+                    <QRGenerator value={`${watch('realId')}`} />
+                </div>
+            ) : (
+                <div className='hidden md:block w-1/2 h-auto rounded-lg border-2 border-dashed'>
+                    <div className='flex items-center justify-center h-full p-10 w-full'>
+                        <div className='bg-neutral-200 h-full w-full flex items-center justify-center rounded-lg'>
+                            <p className='text-gray-500'>Fill the form to generate QR code.</p>
+                        </div>
+                    </div>
                 </div>
             )}
         </div>

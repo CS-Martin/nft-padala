@@ -59,7 +59,6 @@ export const QRGenerator = ({ value }: { value: string }) => {
                     style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
                 />
             </div>
-            <small>{value}</small>
             <p className='text-center mt-4'>Scan the QR code to access the contract page</p>
         </div>
     );
