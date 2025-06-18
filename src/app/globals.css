@@ -175,9 +175,9 @@ h6 {
 }
 
 p {
-    @apply text-base;
+    @apply text-base font-medium;
 }
 
 small {
-    @apply text-sm;
+    @apply text-sm font-medium;
 }
