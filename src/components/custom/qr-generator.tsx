@@ -61,6 +61,7 @@ export const QRGenerator = ({ value }: { value: string }) => {
                     viewBox={`0 0 256 256`}
                     style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
                 />
+                <span className='text-center text-[10px]'>{`${baseUrl}/contract/transfer?id=${value}`}</span>
             </div>
             <p className='text-center mt-4'>Scan the QR code to access the contract page</p>
         </div>

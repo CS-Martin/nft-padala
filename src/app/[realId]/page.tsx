@@ -73,14 +73,17 @@ const NFTCard = ({ data, realId }: { data: ItemDetailsResponse; realId: string }
                     </h3>
                     <p className='text-sm md:pb-8 text-zinc-200 mb-4'>{data.s_locationOrigin}</p>
                 </div>
-                <div className='border p-3 rounded-lg'>
-                    <Image
-                        src={`${(process.env.NEXT_PUBLIC_R2_BUCKET_PUBLIC_URL ?? '') + '/qrcodes/' + realId}.svg`}
-                        alt='QR Code Image'
-                        height={100}
-                        width={100}
-                        className='w-50 h-auto'
-                    />
+                <div className='w-fit'>
+                    <div className='border p-3 w-fit rounded-lg'>
+                        <Image
+                            src={`${(process.env.NEXT_PUBLIC_R2_BUCKET_PUBLIC_URL ?? '') + '/qrcodes/' + realId}.svg`}
+                            alt='QR Code Image'
+                            height={100}
+                            width={100}
+                            className='w-50 h-auto'
+                        />
+                    </div>
+                    {/* <span className='text-[10px]'>{`${(process.env.NEXT_PUBLIC_R2_BUCKET_PUBLIC_URL ?? '') + '/qrcodes/' + realId}.svg`}</span> */}
                 </div>
             </div>
 
