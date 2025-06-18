@@ -95,7 +95,7 @@ export const CreateContractForm = () => {
                     onSubmit={handleSubmit(handleMint)}
                     className='flex flex-col gap-5 mt-5'>
                     <div>
-                        <Label htmlFor='to'>My wallet address:</Label>
+                        <Label htmlFor='to'>My wallet address</Label>
                         <div className='relative'>
                             <Input
                                 readOnly
@@ -120,7 +120,7 @@ export const CreateContractForm = () => {
                     </div>
 
                     <div>
-                        <Label className=''>Item name:</Label>
+                        <Label className=''>Item name</Label>
                         <Input
                             id='itemName'
                             type='text'
@@ -132,7 +132,7 @@ export const CreateContractForm = () => {
                     </div>
 
                     <div>
-                        <Label className=''>Sender&apos;s address:</Label>
+                        <Label className=''>Sender&apos;s address</Label>
                         <Input
                             id='origin'
                             type='text'
@@ -144,7 +144,7 @@ export const CreateContractForm = () => {
                     </div>
 
                     <div>
-                        <Label className=''>Receiver&apos;s wallet address:</Label>
+                        <Label className=''>Receiver&apos;s wallet address</Label>
                         <Input
                             id='finalRecipient'
                             type='text'
@@ -161,7 +161,7 @@ export const CreateContractForm = () => {
                             intent='primary'
                             loading={isPending}
                             disabled={isPending}>
-                            <div className='flex items-center gap-2'>Create Item</div>
+                            Create Item
                         </NeumorphButton>
                     )}
                 </form>
