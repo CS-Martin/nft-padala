@@ -148,7 +148,7 @@ export const abi = [
         type: 'function',
     },
     {
-        inputs: [{ internalType: 'uint256', name: 'tokenId', type: 'uint256' }],
+        inputs: [{ internalType: 'string', name: 'realId', type: 'string' }],
         name: 'getHistory',
         outputs: [
             {
