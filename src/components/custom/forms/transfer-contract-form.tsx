@@ -9,6 +9,7 @@ import { useWriteContract } from 'wagmi';
 import { abi } from '@/utils/abi';
 import { useState } from 'react';
 import Link from 'next/link';
+import { parseGwei } from 'viem';
 
 const transferContractFormSchema = z.object({
     realId: z.string().min(1, 'Item ID is required'),
@@ -47,6 +48,9 @@ export default function TransferContractForm({ realId }: { realId: string | null
                 address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
                 functionName: 'transferItem',
                 args: [data.realId, data.to],
+                gas: 3000000n,
+                maxFeePerGas: parseGwei('2'),
+                maxPriorityFeePerGas: parseGwei('1'),
             });
 
             if (result) {
