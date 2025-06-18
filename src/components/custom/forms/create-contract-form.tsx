@@ -13,7 +13,8 @@ import { abi } from '@/utils/abi';
 import { QRGenerator } from '../qr-generator';
 import Link from 'next/link';
 import NeumorphButton from '@/components/ui/neumorph-button';
-import { generateUID } from '@/lib/utils';
+import { generateUID, shortenedItemId } from '@/lib/utils';
+import { Copy } from 'lucide-react';
 
 const createContractFormSchema = z.object({
     realId: z.string().min(1, 'Real ID is required'),
@@ -89,19 +90,33 @@ export const CreateContractForm = () => {
             )}
 
             <div className='md:w-1/2'>
+                <h4>Transaction Details</h4>
                 <form
                     onSubmit={handleSubmit(handleMint)}
-                    className='flex flex-col gap-5'>
+                    className='flex flex-col gap-5 mt-5'>
                     <div>
-                        <Label className=''>My wallet address:</Label>
-                        <Input
-                            readOnly
-                            id='to'
-                            type='text'
-                            className='mt-2'
-                            {...register('to')}
-                            value={walletAddress}
-                        />
+                        <Label htmlFor='to'>My wallet address:</Label>
+                        <div className='relative'>
+                            <Input
+                                readOnly
+                                id='to'
+                                type='text'
+                                className='mt-2 pr-8'
+                                {...register('to')}
+                                value={shortenedItemId(walletAddress || '')}
+                            />
+                            <button
+                                type='button'
+                                className='cursor-pointer absolute right-3.5 top-1/2 transform -translate-y-1/2 text-neutral-400'
+                                onClick={() => {
+                                    if (walletAddress) {
+                                        navigator.clipboard.writeText(walletAddress);
+                                    }
+                                }}
+                                aria-label='Copy wallet address'>
+                                <Copy className='w-4 h-4' />
+                            </button>
+                        </div>
                     </div>
 
                     <div>
@@ -122,7 +137,7 @@ export const CreateContractForm = () => {
                             id='origin'
                             type='text'
                             className='mt-2'
-                            placeholder='0x...'
+                            placeholder='Naga City, Philippines'
                             {...register('locationOrigin')}
                         />
                         {errors.locationOrigin && <small className='text-red-500 mt-1'>{errors.locationOrigin.message}</small>}
