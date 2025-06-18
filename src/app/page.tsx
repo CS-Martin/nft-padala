@@ -27,6 +27,7 @@ export default function Home() {
                                 <p>Send without relying on third parties blockchain handles everything.</p>
                             </div>
                         </div>
+
                         {/* Card */}
                         <div className='w-[450px] bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl p-8'>
                             <div className='flex flex-col gap-8'>

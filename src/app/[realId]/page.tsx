@@ -6,6 +6,7 @@ import { abi } from '@/utils/abi';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { useReadContract } from 'wagmi';
+import HistoryDataTable from './_components/history-data-table';
 
 export default function ItemDetailsPage() {
     const searchParams = useSearchParams();
@@ -52,7 +53,7 @@ export default function ItemDetailsPage() {
             <p>Item Address: {data.s_locationOrigin}</p>
             <p>Final Recipient: {data.s_finalRecipient}</p>
             <p>Recipient Reached? {data.s_recipientReached ? 'Yes' : 'No'}</p>
-            {/* Additional components and logic to fetch and display item details can be added here */}
+            <HistoryDataTable realId={realId} />
         </div>
     ) : (
         <div>test</div>
