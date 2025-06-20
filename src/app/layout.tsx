@@ -7,6 +7,7 @@ import { headers } from 'next/headers';
 import { CustomWagmiProvider } from '@/providers/wagmi-provider';
 import NavBar from '@/components/block/nav';
 import { Toaster } from '@/components/ui/sonner';
+import { ReactLenis } from 'lenis/react';
 
 const soraFont = Sora({
     variable: '--font-sora',
@@ -36,6 +37,7 @@ export default async function RootLayout({
         <html
             lang='en'
             suppressHydrationWarning>
+            <ReactLenis root />
             <body className={`${soraFont.variable} ${interFont.className} bg-gradient-to-b from-neutral-950 to-neutral-900 overflow-x-hidden antialiased`}>
                 <CustomWagmiProvider initialState={initalState}>
                     <NavBar />
