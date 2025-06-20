@@ -36,7 +36,7 @@ export default async function RootLayout({
         <html
             lang='en'
             suppressHydrationWarning>
-            <body className={`${soraFont.variable} ${interFont.className}`}>
+            <body className={`${soraFont.variable} ${interFont.className} overflow-x-hidden`}>
                 <CustomWagmiProvider initialState={initalState}>
                     <NavBar />
                     {children}

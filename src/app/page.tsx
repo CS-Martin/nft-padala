@@ -1,6 +1,7 @@
 'use client';
 
 import { Footer } from '@/components/block/footer';
+import BentoGrid from '@/components/custom/bento-grid';
 import { AuroraText } from '@/components/magicui/aurora-text';
 import { Announcement, AnnouncementTag, AnnouncementTitle } from '@/components/ui/kibo-ui/announcement';
 import NeumorphButton from '@/components/ui/neumorph-button';
@@ -13,73 +14,7 @@ export default function Home() {
             <main className='px-[20px] lg:px-[100px] 2xl:px-[200px]'>
                 <Hero />
 
-                <section className='flex flex-col justify-center items-center gap-8'>
-                    <div className='flex flex-col items-center gap-8'>
-                        <small className='border-b-2 border-blue-400 pb-1 '>WHY NFTPADALA</small>
-                        <h3>The Smarter Way to Send NFTs</h3>
-                        <p className='text-zinc-300'>Think LBC, but for NFTs. Secure, traceable, and ownership-verified.</p>
-                    </div>
-
-                    <div className='flex flex-wrap gap-8'>
-                        {/* Card */}
-                        <div className='flex-grow w-[450px] bg-zinc-800 rounded-xl p-8'>
-                            <div className='flex flex-col gap-5'>
-                                <div className='mb-14 relative'>
-                                    <div className='absolute bg-blue-900 w-[30px] h-[40px] mt-2'></div>
-                                    <h3 className='absolute bg-blue-400 w-[30px] h-[40px] flex items-center justify-center ml-2'>1</h3>
-                                </div>
-
-                                <h5>Trustless Delivery</h5>
-                                <p>Send without relying on third parties blockchain handles everything.</p>
-                            </div>
-                        </div>
-
-                        {/* Card */}
-                        <div className='flex-grow w-[450px] bg-zinc-800 rounded-2xl p-8'>
-                            <div className='flex flex-col gap-5'>
-                                <div className='mb-14 relative'>
-                                    <div className='absolute bg-blue-900 w-[30px] h-[40px] mt-2'></div>
-                                    <h3 className='absolute bg-blue-400 w-[30px] h-[40px] flex items-center justify-center ml-2'>2</h3>
-                                </div>
-                                <h5>Real-Time Tracking</h5>
-                                <p>Know when it&apos;s sent, received, and claimed — in one dashboard.</p>
-                            </div>
-                        </div>
-                        {/* Card */}
-                        <div className='flex-grow w-[450px] bg-zinc-800 rounded-2xl p-8'>
-                            <div className='flex flex-col gap-5'>
-                                <div className='mb-14 relative'>
-                                    <div className='absolute bg-blue-900 w-[30px] h-[40px] mt-2'></div>
-                                    <h3 className='absolute bg-blue-400 w-[30px] h-[40px] flex items-center justify-center ml-2'>3</h3>
-                                </div>
-                                <h5>Multi-Chain Support</h5>
-                                <p>Works with Ethereum, Polygon, Solana, and more.</p>
-                            </div>
-                        </div>
-                        {/* Card */}
-                        <div className='flex-grow w-[450px] bg-zinc-800 rounded-2xl p-8'>
-                            <div className='flex flex-col gap-5'>
-                                <div className='mb-14 relative'>
-                                    <div className='absolute bg-blue-900 w-[30px] h-[40px] mt-2'></div>
-                                    <h3 className='absolute bg-blue-400 w-[30px] h-[40px] flex items-center justify-center ml-2'>4</h3>
-                                </div>
-                                <h5>Built-in Proof of Ownership</h5>
-                                <p>Every item sent is wrapped in an NFT, ensuring verified transfer.</p>
-                            </div>
-                        </div>
-                        {/* Card */}
-                        <div className='flex-grow w-[450px] bg-zinc-800 rounded-xl p-8'>
-                            <div className='flex flex-col gap-5'>
-                                <div className='mb-14 relative'>
-                                    <div className='absolute bg-blue-900 w-[30px] h-[40px] mt-2'></div>
-                                    <h3 className='absolute bg-blue-400 w-[30px] h-[40px] flex items-center justify-center ml-2'>5</h3>
-                                </div>
-                                <h5>Send Anything</h5>
-                                <p>From NFT art, collectibles, access tokens, documents, or encrypted files.</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                <BentoGrid />
 
                 <section className='h-[750px] flex flex-col justify-center items-center gap-8'>
                     <div className='flex flex-col items-center gap-8'>
@@ -97,7 +32,7 @@ export default function Home() {
 
 function Hero() {
     return (
-        <section className='h-[750px] flex items-center justify-center'>
+        <section className='h-[750px] flex items-center justify-center '>
             <Spotlight />
             {/* Left */}
             <div className='flex flex-col gap-8 justify-center items-center text-center'>
