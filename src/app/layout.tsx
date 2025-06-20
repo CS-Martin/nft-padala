@@ -22,6 +22,24 @@ const interFont = Inter({
 export const metadata: Metadata = {
     title: 'NFT Padala',
     description: 'Send your items in a smart and secure way.',
+
+    metadataBase: new URL('https://nftpadala.martinatole.com'),
+    openGraph: {
+        title: 'NFT Padala',
+        description: 'Send your items in a smart and secure way.',
+        url: 'https://nftpadala.martinatole.com/',
+        siteName: 'NFT Padala',
+        images: [
+            {
+                url: '/graph-og.png',
+                width: 1200,
+                height: 630,
+                alt: 'NFT Padala Banner',
+            },
+        ],
+        locale: 'en_US',
+        type: 'website',
+    },
 };
 
 export default async function RootLayout({
