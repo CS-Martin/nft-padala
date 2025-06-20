@@ -40,7 +40,7 @@ const Hero = () => {
                     </AnnouncementTitle>
                 </Announcement>
                 <h1>
-                    Send your items in a <AuroraText>smart</AuroraText> <br /> and <AuroraText>secured</AuroraText> way
+                    Send your items in a <AuroraText>smart</AuroraText> <br /> and <AuroraText>secure</AuroraText> way
                 </h1>
                 <p className='text-zinc-300'>Experience fast, secure, and trackable delivery powered by blockchain and NFTs.</p>
                 <div className='flex items-center gap-2'>
