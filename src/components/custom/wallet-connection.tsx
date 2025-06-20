@@ -9,7 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { useState } from 'react';
 import { useWalletStore } from '@/stores/wallet.store';
-import { muchShortenedItemId, shortenedItemId } from '@/lib/utils';
+import { muchShortenedItemId } from '@/lib/utils';
 
 interface WalletConnectionProps {
     walletStatus: WalletStatus;
