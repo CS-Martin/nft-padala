@@ -39,7 +39,7 @@ export function Footer() {
                     </NeumorphButton>
                 </Link>
             </div>
-            <footer className='p-4 mt-50 mb-5 bg-zinc-800 flex flex-col gap-8 mx-[20px] lg:mx-[100px] 2xl:mx-[200px] rounded-2xl'>
+            <footer className='p-4 mt-50 mb-5 bg-zinc-800 flex flex-col gap-8 max-w-[90rem] mx-auto rounded-2xl'>
                 <div className='flex items-center justify-between'>
                     <div>
                         <small className='text-zinc-300'>© 2025 NFT Padala. All rights reserved.</small>
