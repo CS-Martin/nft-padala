@@ -27,6 +27,16 @@ function WalletButton() {
     const connectWallet = () => {
         setIsConnecting(true);
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const isWalletInstalled = typeof window !== 'undefined' && typeof (window as any).ethereum !== 'undefined';
+
+        if (!isWalletInstalled) {
+            console.warn('No wallet detected. Please install MetaMask or another web3 wallet extension.');
+            alert('⚠️ No wallet detected. Please install MetaMask or another web3 wallet extension to continue.');
+            setIsConnecting(false);
+            return;
+        }
+
         try {
             connect({ connector: injected() });
         } catch (error) {
@@ -38,7 +48,9 @@ function WalletButton() {
 
     const disconnectWallet = () => {
         setIsConnecting(true);
+
         console.log('Disconnecting wallet...');
+
         try {
             disconnect();
             resetWalletStatus();
