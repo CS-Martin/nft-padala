@@ -8,6 +8,7 @@ import NeumorphButton from '@/components/ui/neumorph-button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { CreateContractForm } from '@/components/custom/forms/create-contract-form';
 import { DiamondPlus } from 'lucide-react';
+import { useWalletStore } from '@/stores/wallet.store';
 
 export default function DashboardPage() {
     return (
@@ -41,12 +42,15 @@ export default function DashboardPage() {
 }
 
 function CreatePadalaModal() {
+    const walletAddress = useWalletStore((state) => state.walletStatus.address);
+
     return (
         <Dialog>
             <DialogTrigger asChild>
                 <NeumorphButton
                     className='cursor-pointer w-full md:w-[15rem]'
                     intent='primary'
+                    disabled={!walletAddress}
                     size={'small'}>
                     <span className='flex items-center gap-1'>
                         <DiamondPlus size={18} />
@@ -59,7 +63,7 @@ function CreatePadalaModal() {
                     <DialogTitle></DialogTitle>
                     <DialogDescription></DialogDescription>
                 </DialogHeader>
-                <div>
+                <div className='overflow-y-auto max-h-[80vh]'>
                     <CreateContractForm />
                 </div>
             </DialogContent>

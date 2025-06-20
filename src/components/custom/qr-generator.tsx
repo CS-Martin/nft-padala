@@ -51,9 +51,9 @@ export const QRGenerator = ({ value }: { value: string }) => {
     }, [value]);
 
     return (
-        <div className='flex flex-col justify-center items-center'>
+        <div className='flex text-center flex-col justify-center items-center'>
             <div
-                className='border p-5 rounded-lg'
+                className='border p-5 rounded-lg text-center'
                 ref={containerRef}>
                 <QRCode
                     size={256}
@@ -63,7 +63,11 @@ export const QRGenerator = ({ value }: { value: string }) => {
                 />
                 <span className='text-center text-[10px]'>{`${baseUrl}/contract/transfer?id=${value}`}</span>
             </div>
-            <p className='text-center mt-4'>Scan the QR code to access the contract page</p>
+
+            <span className='text-[12px] mt-2 text-neutral-400'>
+                You can scan it using a mobile wallet or share it with someone else to let them initiate the transfer contract.
+            </span>
+            <div className='border-b w-full my-5 md:hidden'></div>
         </div>
     );
 };

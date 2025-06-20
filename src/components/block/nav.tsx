@@ -7,7 +7,7 @@ import { injected, useAccount, useConnect, useDisconnect } from 'wagmi';
 import { useWalletStore } from '@/stores/wallet.store';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 export default function NavBar() {
     const pathname = usePathname();
@@ -39,7 +39,6 @@ export default function NavBar() {
 }
 
 function WalletButton() {
-    const router = useRouter();
     const { isConnected, address } = useAccount();
     const { connectAsync } = useConnect();
     const { disconnect } = useDisconnect();
@@ -93,8 +92,6 @@ function WalletButton() {
             disconnect();
             resetWalletStatus();
             toast.success('Wallet disconnected successfully!');
-
-            router.push('/');
         } catch (error) {
             console.error('Failed to disconnect wallet:', error);
             toast.error('Failed to disconnect wallet.', {

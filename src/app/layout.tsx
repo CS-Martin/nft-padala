@@ -45,7 +45,6 @@ export default async function RootLayout({
                     <Toaster
                         position='bottom-right'
                         richColors
-                        expand={true}
                     />
                 </CustomWagmiProvider>
             </body>
