@@ -12,7 +12,7 @@ import { DiamondPlus } from 'lucide-react';
 export default function DashboardPage() {
     return (
         <>
-            <main className='px-[20px] lg:px-[100px] 2xl:px-[200px]'>
+            <main className='max-w-[90rem] px-3 md:px-0 mx-auto mt-30'>
                 <div className='mt-8'>
                     <Breadcrumbs
                         items={[
@@ -22,7 +22,7 @@ export default function DashboardPage() {
                     />
                 </div>
 
-                <div className='mt-8 flex items-center justify-between'>
+                <div className='mt-8 flex flex-col gap-5 md:gap-0 md:flex-row items-center justify-between'>
                     <Input
                         placeholder='Search by item or trait'
                         className='w-[350px]'
@@ -45,7 +45,7 @@ function CreatePadalaModal() {
         <Dialog>
             <DialogTrigger asChild>
                 <NeumorphButton
-                    className='cursor-pointer'
+                    className='cursor-pointer w-full md:w-[15rem]'
                     intent='primary'
                     size={'small'}>
                     <span className='flex items-center gap-1'>

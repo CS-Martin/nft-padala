@@ -7,8 +7,10 @@ import { injected, useAccount, useConnect, useDisconnect } from 'wagmi';
 import { useWalletStore } from '@/stores/wallet.store';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
+import { usePathname } from 'next/navigation';
 
 export default function NavBar() {
+    const pathname = usePathname();
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -23,11 +25,11 @@ export default function NavBar() {
     return (
         <nav
             className={cn(
-                'fixed top-0 z-50 w-full px-2 md:px-5 flex flex-row items-center justify-between transition-all duration-500',
-
-                isScrolled ? 'h-16 bg-black/30 border-b' : 'h-15 md:h-28',
+                'fixed top-0 z-50 w-full px-2 md:px-0 flex flex-row items-center justify-between transition-all duration-500',
+                isScrolled ? 'h-16 !bg-black/50 border-b' : 'h-15 md:h-28',
+                pathname === '/' ? '' : '!h-20 border-b',
             )}>
-            <div className='flex items-center justify-between max-w-7xl w-full mx-auto'>
+            <div className={cn('flex items-center justify-between transition-all duration-500 w-full mx-auto', pathname === '/' ? 'max-w-7xl' : 'max-w-[90rem]')}>
                 <Logo />
 
                 <WalletButton />
@@ -38,7 +40,7 @@ export default function NavBar() {
 
 function WalletButton() {
     const { isConnected, address } = useAccount();
-    const { connect, connectAsync } = useConnect();
+    const { connectAsync } = useConnect();
     const { disconnect } = useDisconnect();
     const { walletStatus, setWalletStatus, resetWalletStatus } = useWalletStore();
 
@@ -72,9 +74,12 @@ function WalletButton() {
                 success: 'Wallet connected successfully!',
                 error: 'Failed to connect wallet.',
             });
-            // connect({ connector: injected() });
         } catch (error) {
             console.error('Failed to connect wallet:', error);
+
+            toast.error('Failed to connect wallet.', {
+                description: error instanceof Error ? error.message : 'An unknown error occurred.',
+            });
         } finally {
             setIsConnecting(false);
         }
