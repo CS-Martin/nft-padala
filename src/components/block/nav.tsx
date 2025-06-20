@@ -5,13 +5,32 @@ import Logo from './logo';
 import { WalletConnection } from '../custom/wallet-connection';
 import { injected, useAccount, useConnect, useDisconnect } from 'wagmi';
 import { useWalletStore } from '@/stores/wallet.store';
+import { cn } from '@/lib/utils';
 
 export default function NavBar() {
-    return (
-        <nav className='h-[60px] w-full border-b flex items-center justify-between px-[20px] lg:px-[100px] 2xl:px-[200px]'>
-            <Logo />
+    const [isScrolled, setIsScrolled] = useState(false);
 
-            <WalletButton />
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 50);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    return (
+        <nav
+            className={cn(
+                'fixed top-0 z-50 w-full px-2 md:px-5 flex flex-row items-center justify-between transition-all duration-500',
+
+                isScrolled ? 'h-16 bg-black/30 border-b' : 'h-15 md:h-28',
+            )}>
+            <div className='flex items-center justify-between max-w-7xl w-full mx-auto'>
+                <Logo />
+
+                <WalletButton />
+            </div>
         </nav>
     );
 }
