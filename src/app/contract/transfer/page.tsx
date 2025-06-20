@@ -8,7 +8,7 @@ export default function TransferContractPage() {
     const realId = searchParams.get('id');
 
     return (
-        <div className='h-dvh w-full max-w-4xl px-2 mt-10 md:px-5 mx-auto'>
+        <div className='h-dvh w-full mt-30 max-w-4xl px-2 md:px-5 mx-auto'>
             <TransferContractForm realId={realId} />
         </div>
     );

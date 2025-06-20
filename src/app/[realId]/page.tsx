@@ -30,7 +30,7 @@ export default function ItemDetailsPage() {
     }
 
     return realId ? (
-        <main className='px-[20px] lg:px-[100px] 2xl:px-[200px]'>
+        <main className='max-w-[90rem] px-3 md:px-0 mx-auto mt-30'>
             <div className='mt-8'>
                 <Breadcrumbs
                     items={[
