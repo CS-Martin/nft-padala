@@ -18,6 +18,12 @@ export function shortenedItemId(id: string, startLength = 10, endLength = 6): st
     return `${id.slice(0, startLength)}...${id.slice(-endLength)}`;
 }
 
+export function muchShortenedItemId(id: string, startLength = 4, endLength = 3): string {
+    if (typeof id !== 'string') id = String(id);
+    if (!id || id.length <= startLength + endLength) return id;
+    return `${id.slice(0, startLength)}...${id.slice(-endLength)}`;
+}
+
 export function getBaseUrl(): string {
     const baseUrl = process.env.NODE_ENV === 'production' ? 'https://nftpadala.martinatole.com' : 'http://localhost:3000';
 

@@ -8,6 +8,8 @@ import { IoIosWallet } from 'react-icons/io';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { useState } from 'react';
+import { useWalletStore } from '@/stores/wallet.store';
+import { muchShortenedItemId, shortenedItemId } from '@/lib/utils';
 
 interface WalletConnectionProps {
     walletStatus: WalletStatus;
@@ -40,6 +42,8 @@ export const WalletConnection = ({ walletStatus, connectWallet, disconnectWallet
 };
 
 function AvatarButton({ walletStatus, disconnectWallet, isLoading }: WalletConnectionProps) {
+    const walletAddress = useWalletStore((state) => state.walletStatus.address);
+
     const [copied, setCopied] = useState(false);
 
     const handleCopy = async () => {
@@ -53,16 +57,19 @@ function AvatarButton({ walletStatus, disconnectWallet, isLoading }: WalletConne
     };
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger className='relative flex cursor-pointer'>
-                <Avatar>
-                    <AvatarImage src='https://github.com/shadcn.png' />
-                    <AvatarFallback>
-                        <User />
-                    </AvatarFallback>
-                </Avatar>
+            <DropdownMenuTrigger className='relative gap-3 border rounded-full p-1.5 flex items-center justify-between cursor-pointer'>
+                <div className='relative'>
+                    <Avatar className='w-7 h-7'>
+                        <AvatarImage src='https://github.com/shadcn.png' />
+                        <AvatarFallback>
+                            <User />
+                        </AvatarFallback>
+                    </Avatar>
 
-                {/* Green active circle */}
-                <span className='absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-green-500 border-2 border-neutral-950'></span>
+                    {/* Green active circle */}
+                    <span className='absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-green-500 border-2 border-neutral-950'></span>
+                </div>
+                <small className='text-neutral-300'>{muchShortenedItemId(walletAddress)}</small>
             </DropdownMenuTrigger>
 
             <DropdownMenuContent className='w-[200px]'>

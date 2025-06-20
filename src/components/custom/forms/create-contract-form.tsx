@@ -79,7 +79,7 @@ export const CreateContractForm = () => {
 
         try {
             const tx = await writeContractAsync({
-                abi: abi,
+                abi,
                 address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
                 functionName: 'mint',
                 args: [data],
@@ -88,42 +88,28 @@ export const CreateContractForm = () => {
                 maxPriorityFeePerGas: parseGwei('1'),
             });
 
-            if (tx) {
-                const loadingToastId = toast.loading('Your transaction is being processed...');
+            if (!tx) throw new Error('No transaction hash returned');
 
-                const receipt = await publicClient.waitForTransactionReceipt({
-                    hash: tx,
-                    confirmations: 1,
+            const loadingToastId = toast.loading('Your transaction is being processed...');
+            const receipt = await publicClient.waitForTransactionReceipt({ hash: tx, confirmations: 1 });
+
+            toast.dismiss(loadingToastId);
+
+            if (receipt.status === 'success') {
+                setTransactionDone(true);
+                setValue('realId', data.realId);
+                toast.success('✅ Transaction confirmed!', {
+                    description: 'Your item has been successfully minted.',
                 });
-
-                if (receipt.status === 'success') {
-                    toast.dismiss(loadingToastId);
-                    setTransactionDone(true);
-                    setValue('realId', data.realId);
-
-                    toast.success('✅ Transaction confirmed!', {
-                        description: `Your item has been successfully minted.`,
-                    });
-
-                    setIsTransactionLoading(false);
-                } else {
-                    console.error('Transaction failed:', receipt);
-                    toast.error('⚠️ Transaction failed.');
-
-                    setIsTransactionLoading(false);
-                    setTransactionDone(false);
-
-                    throw new Error('Transaction failed', { cause: receipt });
-                }
+            } else {
+                toast.error('⚠️ Transaction failed.');
+                throw new Error('Transaction failed');
             }
         } catch (error) {
-            setIsTransactionLoading(false);
-            setTransactionDone(false);
-
-            console.error('Error during minting process:', error);
+            console.error('Minting error:', error);
             toast.error('❌ Minting failed. Please check your wallet and network.');
         } finally {
-            console.log('Minting process completed');
+            setIsTransactionLoading(false);
         }
     };
 
