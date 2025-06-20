@@ -6,6 +6,7 @@ import { WalletConnection } from '../custom/wallet-connection';
 import { injected, useAccount, useConnect, useDisconnect } from 'wagmi';
 import { useWalletStore } from '@/stores/wallet.store';
 import { cn } from '@/lib/utils';
+import { toast } from 'sonner';
 
 export default function NavBar() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -37,7 +38,7 @@ export default function NavBar() {
 
 function WalletButton() {
     const { isConnected, address } = useAccount();
-    const { connect } = useConnect();
+    const { connect, connectAsync } = useConnect();
     const { disconnect } = useDisconnect();
     const { walletStatus, setWalletStatus, resetWalletStatus } = useWalletStore();
 
@@ -50,14 +51,28 @@ function WalletButton() {
         const isWalletInstalled = typeof window !== 'undefined' && typeof (window as any).ethereum !== 'undefined';
 
         if (!isWalletInstalled) {
-            console.warn('No wallet detected. Please install MetaMask or another web3 wallet extension.');
-            alert('⚠️ No wallet detected. Please install MetaMask or another web3 wallet extension to continue.');
+            toast.error('No wallet detected.', {
+                description: `Please install MetaMask or another web3 wallet to continue.`,
+                action: {
+                    label: 'Install Wallet',
+                    onClick: () => {
+                        window.open('https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en-US', '_blank');
+                    },
+                },
+            });
+
             setIsConnecting(false);
+
             return;
         }
 
         try {
-            connect({ connector: injected() });
+            toast.promise(connectAsync({ connector: injected() }), {
+                loading: 'Connecting to wallet...',
+                success: 'Wallet connected successfully!',
+                error: 'Failed to connect wallet.',
+            });
+            // connect({ connector: injected() });
         } catch (error) {
             console.error('Failed to connect wallet:', error);
         } finally {

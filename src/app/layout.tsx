@@ -43,8 +43,9 @@ export default async function RootLayout({
                     <NavBar />
                     {children}
                     <Toaster
-                        position='top-center'
+                        position='bottom-right'
                         richColors
+                        expand={true}
                     />
                 </CustomWagmiProvider>
             </body>
