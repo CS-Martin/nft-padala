@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Shield, Activity, Globe, FileCheck, Send, Zap, Lock, TrendingUp, Users, Sparkles } from 'lucide-react';
+import { Shield, Activity, Globe, FileCheck, Send, Zap, Lock, Users, Sparkles } from 'lucide-react';
 import { Button } from '../ui/button';
 
 const BentoGrid = () => {

@@ -1,7 +1,6 @@
-'use client';
-
 import { Footer } from '@/components/block/footer';
 import BentoGrid from '@/components/custom/bento-grid';
+import HowItWorks from '@/components/custom/how-it-works';
 import { AuroraText } from '@/components/magicui/aurora-text';
 import { Announcement, AnnouncementTag, AnnouncementTitle } from '@/components/ui/kibo-ui/announcement';
 import NeumorphButton from '@/components/ui/neumorph-button';
@@ -11,18 +10,12 @@ import { ArrowUpRightIcon, CircleCheck, Gift, Package, PackageCheck } from 'luci
 export default function Home() {
     return (
         <>
-            <main className='px-[20px] lg:px-[100px] 2xl:px-[200px]'>
+            <main className='px-5 md:px-0  relative overflow-hidden'>
                 <Hero />
 
                 <BentoGrid />
 
-                <section className='h-[750px] flex flex-col justify-center items-center gap-8'>
-                    <div className='flex flex-col items-center gap-8'>
-                        <small className='border-b-2 border-blue-400 pb-1 uppercase'>How It Works</small>
-                        <h3>3 Steps to Send a Padala</h3>
-                        <p className='text-zinc-300'>Your NFT. Your rules. Fully on-chain.</p>
-                    </div>
-                </section>
+                <HowItWorks />
             </main>
 
             <Footer />
@@ -30,9 +23,9 @@ export default function Home() {
     );
 }
 
-function Hero() {
+const Hero = () => {
     return (
-        <section className='h-[750px] flex items-center justify-center '>
+        <section className='h-[750px] flex items-center justify-center'>
             <Spotlight />
             {/* Left */}
             <div className='flex flex-col gap-8 justify-center items-center text-center'>
@@ -62,7 +55,7 @@ function Hero() {
                     </NeumorphButton>
                 </div>
 
-                <div className='flex flex-row gap-8'>
+                <div className='flex flex-col items-center md:flex-row gap-3 md:gap-8'>
                     <div className='flex items-center gap-2'>
                         <Gift size={14} />
                         <small className='text-zinc-300'>Gift an NFT artwork</small>
@@ -79,4 +72,4 @@ function Hero() {
             </div>
         </section>
     );
-}
+};
